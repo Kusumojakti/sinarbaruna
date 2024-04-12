@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".LoginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        android:padding="25dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CV. Sinar Baruna Sejahtera"
+            android:fontFamily="@font/montseratbold"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="25dp"
+        android:background="@color/primary">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data Jadwal"
+            android:fontFamily="@font/montseratbold"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textAllCaps="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"/>
+
+        <Button
+            android:id="@+id/btn_reviewjadwal"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:text="Review Jadwal"
+            android:textAllCaps="false"
+            android:fontFamily="@font/montseratbold"
+            android:layout_alignParentEnd="true"/>
+
+        <Button
+            android:id="@+id/btn_statusjadwal"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:text="Status Jadwal"
+            android:textAllCaps="false"
+            android:fontFamily="@font/montseratbold"
+            android:layout_alignParentEnd="true"/>
+
+        <Button
+            android:id="@+id/btn_jadwalbaru"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:text="Jadwal Baru"
+            android:textAllCaps="false"
+            android:fontFamily="@font/montseratbold"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="60dp"/>
+
+
+        <Button
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:text="Kembali"
+            android:textAllCaps="true"
+            android:fontFamily="@font/montseratbold"
+            android:layout_alignParentEnd="true" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
