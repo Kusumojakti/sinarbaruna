@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LoginActivity">
+    tools:context=".InputDataJadwalBaruActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -47,10 +47,10 @@
                 android:layout_marginBottom="20dp"
                 android:layout_marginTop="10dp"/>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginTop="10dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -58,9 +58,8 @@
                     android:text="Tanggal"
                     android:fontFamily="@font/montseratbold"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
+                    android:textSize="12sp"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="20dp"
                     android:layout_marginTop="20dp"/>
 
                 <Spinner
@@ -69,17 +68,16 @@
                     android:layout_height="35dp"
                     android:textAlignment="center"
                     android:textColorHint="@color/black"
-                    android:layout_marginBottom="20dp"
                     android:layout_marginTop="10dp"
                     android:spinnerMode="dropdown"
-                    android:layout_marginStart="98dp"
-                    android:background="@drawable/bgform"/>
-            </LinearLayout>
+                    android:background="@drawable/bgform"
+                    android:layout_alignParentEnd="true"/>
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginTop="12dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -87,7 +85,7 @@
                     android:text="Type Moulding"
                     android:fontFamily="@font/montseratbold"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
+                    android:textSize="12sp"
                     android:layout_gravity="center"
                     android:layout_marginBottom="20dp"
                     android:layout_marginTop="10dp"/>

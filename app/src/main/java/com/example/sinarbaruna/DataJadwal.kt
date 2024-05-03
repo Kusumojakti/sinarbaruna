@@ -1,20 +1,38 @@
 package com.example.sinarbaruna
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.sinarbaruna.databinding.ActivityDataJadwalBinding
 
 class DataJadwal : AppCompatActivity() {
+    private lateinit var binding : ActivityDataJadwalBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_data_jadwal)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        binding = ActivityDataJadwalBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.btnJadwalbaru.setOnClickListener {
+            val intent = Intent(this, JadwalBaruActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnReviewjadwal.setOnClickListener {
+            val intent = Intent(this, ReviewDataJadwalActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnStatusjadwal.setOnClickListener {
+            val intent = Intent(this, InputStatusJadwalActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.backbtn.setOnClickListener {
+            val intent = Intent(this, DashboardsActivity::class.java)
+            startActivity(intent)
         }
     }
 }
