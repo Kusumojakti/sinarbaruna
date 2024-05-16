@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">sinarbaruna</string>
+    <string name="selected_item">Selected item:</string>
+
+    <string-array name="bagian">
+        <item>manual</item>
+        <item>cnc</item>
+    </string-array>
+
+    <string-array name="keterangan">
+        <item>Selesai</item>
+        <item>Proses</item>
+        <item>Tidak Selesai</item>
+    </string-array>
+
+    <string-array name="status">
+        <item>Done</item>
+        <item>Pending</item>
+        <item>Waiting</item>
+        <item>Cancel</item>
+    </string-array>
 </resources>

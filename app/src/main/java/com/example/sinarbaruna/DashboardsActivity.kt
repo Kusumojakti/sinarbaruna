@@ -10,11 +10,17 @@ import com.example.sinarbaruna.databinding.ActivityDashboardsBinding
 
 class DashboardsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDashboardsBinding
+    private var userole: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDashboardsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        userole = intent.getStringExtra("role")
+        if (userole != "admin") {
+            binding.btnMasterdata.isEnabled = false
+            binding.btnMasterdata.alpha = 0.5f // Mengubah tampilan tombol agar terlihat dinonaktifkan
+        }
         binding.btnMasterdata.setOnClickListener {
             val intent = Intent(this, MasterDataActivity::class.java)
             startActivity(intent)

@@ -1,16 +1,218 @@
 package com.example.sinarbaruna
 
+import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.util.Log
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.SearchView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.androidnetworking.AndroidNetworking
+import com.androidnetworking.common.Priority
+import com.androidnetworking.error.ANError
+import com.androidnetworking.interfaces.JSONObjectRequestListener
+import com.example.sinarbaruna.databinding.ActivityInputStatusJadwalBinding
+import org.json.JSONException
+import org.json.JSONObject
 
 class InputStatusJadwalActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityInputStatusJadwalBinding
+    private var selectedProcess: String? = null
+    private var selectedId: Int? = null
+    private var searchedId: Int? = 0
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_input_status_jadwal)
+        binding = ActivityInputStatusJadwalBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
+        val statusket = resources.getStringArray(R.array.keterangan)
+        val dropdown = binding.inputStatus // Use view binding to access the spinner
+
+        val adapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_item, statusket
+        )
+        dropdown.adapter = adapter
+
+        dropdown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
+                selectedProcess = statusket[position] // Save selected value
+                Toast.makeText(
+                    this@InputStatusJadwalActivity,
+                    "Pilih Keterangan $selectedProcess",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // No action needed
+            }
+        }
+
+        binding.searchId.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let {
+                    val id = it.toInt()
+                    searchById(id)
+//                    if (id != null) {
+//                        searchById(id)
+//                    } else {
+//                        Toast.makeText(this@InputStatusJadwalActivity, "Invalid ID format", Toast.LENGTH_SHORT).show()
+//                    }
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+        })
+
+        binding.btnTambah.setOnClickListener {
+            if (searchedId != null) {
+                updateData(searchedId!!)
+            } else {
+                Toast.makeText(this, "Please search for an ID first", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+    }
+
+    private fun searchById(id: Int) {
+        val url = "http://sinarbaruna.d2l.my.id/api/jadwal/$id"
+
+        val sharedPreference = this.getSharedPreferences("PREFERENCE_NAME", MODE_PRIVATE)
+        val token = sharedPreference?.getString("token", "")
+        Log.d(ContentValues.TAG, "Token: $token") // Log token
+
+        AndroidNetworking.get(url)
+            .addHeaders("Content-Type", "application/json")
+            .addHeaders("Authorization", "Bearer $token")
+            .setPriority(Priority.MEDIUM)
+            .build()
+            .getAsJSONObject(object : JSONObjectRequestListener {
+                override fun onResponse(response: JSONObject) {
+                    try {
+                        if (response.getString("success") == "true") {
+                            val data = response.optJSONObject("data")
+                            if (data != null) {
+                                val id = data.getInt("id")
+                                binding.inputId.setText(data.getString("id"))
+                                binding.inputIdmoulding.setText(data.getString("id_moulding"))
+                                binding.inputTanggal.setText(data.getString("tanggal"))
+                                binding.inputType.setText(data.getString("type_moulding"))
+                                binding.inputDurasi.setText(data.getString("durasi"))
+                                binding.edtMulaitanggal.setText(data.getString("mulai_tanggal"))
+                                binding.edtPic.setText(data.getString("user_id"))
+                                selectedId = id // Set selectedId after successful response
+                                searchedId = id
+                            } else {
+                                Log.e(ContentValues.TAG, "Data is null or does not exist in the response")
+                            }
+                        } else {
+                            Toast.makeText(applicationContext, response.getString("message"), Toast.LENGTH_SHORT).show()
+                        }
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                        Toast.makeText(applicationContext, "Error occurred", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onError(error: ANError) {
+                    Log.d(ContentValues.TAG, "onError errorCode : " + error.errorCode)
+                    Log.d(ContentValues.TAG, "onError errorBody : " + error.errorBody)
+                    Log.d(ContentValues.TAG, "onError errorDetail : " + error.errorDetail)
+                    Toast.makeText(applicationContext, "Network error: " + error.errorDetail, Toast.LENGTH_SHORT).show()
+                }
+            })
+    }
+
+
+    private fun updateData(id: Int) {
+        val tanggal = binding.inputTanggal.text.toString().trim()
+        val id = binding.inputId.text.toString().trim()
+        val idmoulding = binding.inputIdmoulding.text.toString().trim()
+        val typemoulding = binding.inputType.text.toString().trim()
+        val durasi = binding.inputDurasi.text.toString().trim()
+        val mulaitanggal = binding.edtMulaitanggal.text.toString().trim()
+        val pic = binding.edtPic.text.toString().trim()
+
+        // Validate input
+        if (tanggal.isEmpty() || typemoulding.isEmpty() || durasi.isEmpty() || mulaitanggal.isEmpty() || pic.isEmpty() || selectedProcess.isNullOrEmpty()) {
+            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        // Create JSON object
+        val jsonObject = JSONObject()
+        try {
+            jsonObject.put("id", id)
+            jsonObject.put("tanggal", tanggal)
+            jsonObject.put("id_moulding", idmoulding)
+            jsonObject.put("type_moulding", typemoulding)
+            jsonObject.put("durasi", durasi)
+            jsonObject.put("mulai_tanggal", mulaitanggal)
+            jsonObject.put("username", pic)
+            jsonObject.put("keterangan", selectedProcess)
+        } catch (e: JSONException) {
+            e.printStackTrace()
+        }
+
+        Log.d(ContentValues.TAG, "Request JSON: $jsonObject") // Log JSON request
+
+        val sharedPreference = this.getSharedPreferences("PREFERENCE_NAME", MODE_PRIVATE)
+        val token = sharedPreference?.getString("token", "")
+        Log.d(ContentValues.TAG, "Token: $token") // Log token
+
+        val url = "http://sinarbaruna.d2l.my.id/api/jadwal/$id"
+
+        // Assuming the endpoint for updating is the same but with PUT method
+        AndroidNetworking.put(url)
+            .addJSONObjectBody(jsonObject)
+            .addHeaders("Content-Type", "application/json")
+            .addHeaders("Authorization", "Bearer $token")
+            .setPriority(Priority.MEDIUM)
+            .build()
+            .getAsJSONObject(object : JSONObjectRequestListener {
+                override fun onResponse(response: JSONObject) {
+                    try {
+                        Log.d(ContentValues.TAG, response.toString())
+                        if (response.getString("success") == "true") {
+                            Toast.makeText(this@InputStatusJadwalActivity, "Update successful", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this@InputStatusJadwalActivity, JadwalBaruActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        } else {
+                            Toast.makeText(applicationContext, response.getString("message"), Toast.LENGTH_SHORT).show()
+                        }
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                        Toast.makeText(applicationContext, "Error occurred", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onError(error: ANError) {
+                    Log.d(ContentValues.TAG, "onError errorCode : " + error.errorCode)
+                    Log.d(ContentValues.TAG, "onError errorBody : " + error.errorBody)
+                    Log.d(ContentValues.TAG, "onError errorDetail : " + error.errorDetail)
+                    Toast.makeText(applicationContext, "Network error: " + error.errorDetail, Toast.LENGTH_SHORT).show()
+                }
+            })
+    }
+
+
+    private fun getToken(): String {
+        val sharedPreference = this.getSharedPreferences("PREFERENCE_NAME", MODE_PRIVATE)
+        return sharedPreference?.getString("token", "") ?: ""
     }
 }

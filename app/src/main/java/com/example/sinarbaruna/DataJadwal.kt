@@ -10,10 +10,17 @@ import com.example.sinarbaruna.databinding.ActivityDataJadwalBinding
 
 class DataJadwal : AppCompatActivity() {
     private lateinit var binding : ActivityDataJadwalBinding
+    private var userole: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDataJadwalBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        userole = intent.getStringExtra("role")
+        if (userole == "kepala bagian") {
+            binding.btnJadwalbaru.isEnabled = false
+            binding.btnJadwalbaru.alpha = 0.5f // Mengubah tampilan tombol agar terlihat dinonaktifkan
+        }
 
         binding.btnJadwalbaru.setOnClickListener {
             val intent = Intent(this, JadwalBaruActivity::class.java)

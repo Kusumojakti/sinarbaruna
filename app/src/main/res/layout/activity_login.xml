@@ -60,6 +60,7 @@
             android:layout_height="48dp"
             android:background="@drawable/bgform"
             android:hint="password"
+            android:inputType="textPassword"
             android:textAlignment="center"
             android:fontFamily="@font/montseratmedium"
             android:textColorHint="@color/black"

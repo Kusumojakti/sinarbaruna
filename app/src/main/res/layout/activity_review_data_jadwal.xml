@@ -70,6 +70,7 @@
                     android:layout_height="wrap_content">
 
                     <TableLayout
+                        android:id="@+id/tablelayout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginTop="10dp"
@@ -161,137 +162,21 @@
                                 android:textColor="@color/black"
                                 android:text="      " />
                         </TableRow>
-
-                        <TableRow android:background="#F0F7F7" android:padding="5dp">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="5dp"
-                                android:text="1" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="5dp"
-                                android:text="005" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="5dp"
-                                android:text="11-04-2024" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="5dp"
-                                android:text="Sendok" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="5dp"
-                                android:text="35 Hari" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="5dp"
-                                android:text="12-04-2024" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="5dp"
-                                android:text="Rizal" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="5dp"
-                                android:text="Process" />
-                            <CheckBox
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="2dp"
-                                android:textStyle="bold"
-                                android:textColor="@color/black" />
-                        </TableRow>
-
-                        <TableRow android:background="#F0F7F7" android:padding="5dp">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="5dp"
-                                android:text="2" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="5dp"
-                                android:text="005" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="5dp"
-                                android:text="11-04-2024" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="5dp"
-                                android:text="Sendok" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="5dp"
-                                android:text="35 Hari" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="5dp"
-                                android:text="12-04-2024" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="5dp"
-                                android:text="Rizal" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="5dp"
-                                android:text="Process" />
-                            <CheckBox
-                                android:layout_width="48dp"
-                                android:layout_height="48dp"
-                                android:layout_weight="1"
-                                android:padding="2dp"
-                                android:textStyle="bold"
-                                android:textColor="@color/black" />
-                        </TableRow>
                     </TableLayout>
                 </HorizontalScrollView>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:layout_marginTop="20dp">
-                    <Button
-                        android:id="@+id/btn_tambah"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Tambah"
-                        android:textAllCaps="false"
-                        android:fontFamily="@font/montseratbold"/>
+<!--                    <Button-->
+<!--                        android:id="@+id/btn_tambah"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:text="Tambah"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:fontFamily="@font/montseratbold"/>-->
                     <Button
                         android:id="@+id/btn_hapus"
                         android:layout_width="wrap_content"
@@ -299,18 +184,16 @@
                         android:layout_gravity="center"
                         android:text="Hapus"
                         android:textAllCaps="false"
-                        android:fontFamily="@font/montseratbold"
-                        android:layout_marginStart="50dp"
-                        android:layout_alignParentEnd="true"/>
-                    <Button
-                        android:id="@+id/btn_edit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Edit"
-                        android:textAllCaps="false"
-                        android:layout_marginStart="50dp"
-                        android:fontFamily="@font/montseratbold"/>
+                        android:fontFamily="@font/montseratbold" />
+<!--                    <Button-->
+<!--                        android:id="@+id/btn_edit"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:text="Edit"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:layout_marginStart="50dp"-->
+<!--                        android:fontFamily="@font/montseratbold"/>-->
                 </LinearLayout>
 
                 <LinearLayout

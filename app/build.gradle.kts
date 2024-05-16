@@ -48,7 +48,7 @@ android {
         }
     }
     viewBinding {
-        enable = true
+        enable   = true
     }
 }
 
@@ -73,4 +73,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+
+    implementation(libs.android.networking)
 }
