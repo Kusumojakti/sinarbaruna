@@ -13,17 +13,18 @@ import androidx.appcompat.app.AppCompatActivity
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
+import com.androidnetworking.interfaces.JSONArrayRequestListener
 import com.androidnetworking.interfaces.JSONObjectRequestListener
 import com.example.sinarbaruna.databinding.ActivityInputStatusJadwalBinding
+import com.example.sinarbaruna.model.dataJadwal
+import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 
 class InputStatusJadwalActivity : AppCompatActivity() {
     private lateinit var binding: ActivityInputStatusJadwalBinding
     private var selectedProcess: String? = null
-    private var selectedId: Int? = null
     private var searchedId: Int? = 0
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +32,7 @@ class InputStatusJadwalActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val statusket = resources.getStringArray(R.array.keterangan)
-        val dropdown = binding.inputStatus // Use view binding to access the spinner
+        val dropdown = binding.inputStatus
 
         val adapter = ArrayAdapter(
             this,
@@ -46,7 +47,7 @@ class InputStatusJadwalActivity : AppCompatActivity() {
                 position: Int,
                 id: Long
             ) {
-                selectedProcess = statusket[position] // Save selected value
+                selectedProcess = statusket[position]
                 Toast.makeText(
                     this@InputStatusJadwalActivity,
                     "Pilih Keterangan $selectedProcess",
@@ -64,11 +65,6 @@ class InputStatusJadwalActivity : AppCompatActivity() {
                 query?.let {
                     val id = it.toInt()
                     searchById(id)
-//                    if (id != null) {
-//                        searchById(id)
-//                    } else {
-//                        Toast.makeText(this@InputStatusJadwalActivity, "Invalid ID format", Toast.LENGTH_SHORT).show()
-//                    }
                 }
                 return true
             }
@@ -80,20 +76,25 @@ class InputStatusJadwalActivity : AppCompatActivity() {
 
         binding.btnTambah.setOnClickListener {
             if (searchedId != null) {
-                updateData(searchedId!!)
+                updateData(searchedId.toString())
             } else {
                 Toast.makeText(this, "Please search for an ID first", Toast.LENGTH_SHORT).show()
             }
         }
-
+        binding.btnHapus.setOnClickListener {
+            if (searchedId != null) {
+                deleteJadwal(searchedId.toString())
+            } else {
+                Toast.makeText(this, "Please search for an ID first", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun searchById(id: Int) {
         val url = "http://sinarbaruna.d2l.my.id/api/jadwal/$id"
 
-        val sharedPreference = this.getSharedPreferences("PREFERENCE_NAME", MODE_PRIVATE)
-        val token = sharedPreference?.getString("token", "")
-        Log.d(ContentValues.TAG, "Token: $token") // Log token
+        val token = getToken()
+        Log.d(ContentValues.TAG, "Token: $token")
 
         AndroidNetworking.get(url)
             .addHeaders("Content-Type", "application/json")
@@ -104,8 +105,9 @@ class InputStatusJadwalActivity : AppCompatActivity() {
                 override fun onResponse(response: JSONObject) {
                     try {
                         if (response.getString("success") == "true") {
-                            val data = response.optJSONObject("data")
-                            if (data != null) {
+                            val d = response.getJSONArray("data")
+                            val data = d.getJSONObject(0)
+                            if (data != null ){
                                 val id = data.getInt("id")
                                 binding.inputId.setText(data.getString("id"))
                                 binding.inputIdmoulding.setText(data.getString("id_moulding"))
@@ -114,17 +116,12 @@ class InputStatusJadwalActivity : AppCompatActivity() {
                                 binding.inputDurasi.setText(data.getString("durasi"))
                                 binding.edtMulaitanggal.setText(data.getString("mulai_tanggal"))
                                 binding.edtPic.setText(data.getString("user_id"))
-                                selectedId = id // Set selectedId after successful response
                                 searchedId = id
-                            } else {
-                                Log.e(ContentValues.TAG, "Data is null or does not exist in the response")
                             }
-                        } else {
-                            Toast.makeText(applicationContext, response.getString("message"), Toast.LENGTH_SHORT).show()
+
                         }
-                    } catch (e: JSONException) {
-                        e.printStackTrace()
-                        Toast.makeText(applicationContext, "Error occurred", Toast.LENGTH_SHORT).show()
+                    } catch (e: Exception) {
+                        Log.e(ContentValues.TAG, "Error parsing data: ${e.message}")
                     }
                 }
 
@@ -138,25 +135,21 @@ class InputStatusJadwalActivity : AppCompatActivity() {
     }
 
 
-    private fun updateData(id: Int) {
+    private fun updateData(id: String) {
         val tanggal = binding.inputTanggal.text.toString().trim()
-        val id = binding.inputId.text.toString().trim()
         val idmoulding = binding.inputIdmoulding.text.toString().trim()
         val typemoulding = binding.inputType.text.toString().trim()
         val durasi = binding.inputDurasi.text.toString().trim()
         val mulaitanggal = binding.edtMulaitanggal.text.toString().trim()
         val pic = binding.edtPic.text.toString().trim()
 
-        // Validate input
         if (tanggal.isEmpty() || typemoulding.isEmpty() || durasi.isEmpty() || mulaitanggal.isEmpty() || pic.isEmpty() || selectedProcess.isNullOrEmpty()) {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
             return
         }
 
-        // Create JSON object
         val jsonObject = JSONObject()
         try {
-            jsonObject.put("id", id)
             jsonObject.put("tanggal", tanggal)
             jsonObject.put("id_moulding", idmoulding)
             jsonObject.put("type_moulding", typemoulding)
@@ -168,15 +161,13 @@ class InputStatusJadwalActivity : AppCompatActivity() {
             e.printStackTrace()
         }
 
-        Log.d(ContentValues.TAG, "Request JSON: $jsonObject") // Log JSON request
+        Log.d(ContentValues.TAG, "Request JSON: $jsonObject")
 
-        val sharedPreference = this.getSharedPreferences("PREFERENCE_NAME", MODE_PRIVATE)
-        val token = sharedPreference?.getString("token", "")
-        Log.d(ContentValues.TAG, "Token: $token") // Log token
+        val token = getToken()
+        Log.d(ContentValues.TAG, "Token: $token")
 
         val url = "http://sinarbaruna.d2l.my.id/api/jadwal/$id"
 
-        // Assuming the endpoint for updating is the same but with PUT method
         AndroidNetworking.put(url)
             .addJSONObjectBody(jsonObject)
             .addHeaders("Content-Type", "application/json")
@@ -210,7 +201,43 @@ class InputStatusJadwalActivity : AppCompatActivity() {
             })
     }
 
+    private fun deleteJadwal(id: String) {
+        val url = "http://sinarbaruna.d2l.my.id/api/jadwal/$id"
 
+        val token = getToken()
+        Log.d(ContentValues.TAG, "Token: $token")
+
+        AndroidNetworking.delete(url)
+            .addHeaders("Content-Type", "application/json")
+            .addHeaders("Authorization", "Bearer $token")
+            .setPriority(Priority.MEDIUM)
+            .build()
+            .getAsJSONObject(object : JSONObjectRequestListener {
+                override fun onResponse(response: JSONObject) {
+                    try {
+                        Log.d(ContentValues.TAG, response.toString())
+                        if (response.getString("success") == "true") {
+                            Toast.makeText(this@InputStatusJadwalActivity, "Delete successful", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this@InputStatusJadwalActivity, JadwalBaruActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        } else {
+                            Toast.makeText(applicationContext, response.getString("message"), Toast.LENGTH_SHORT).show()
+                        }
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                        Toast.makeText(applicationContext, "Error occurred", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onError(error: ANError) {
+                    Log.d(ContentValues.TAG, "onError errorCode : " + error.errorCode)
+                    Log.d(ContentValues.TAG, "onError errorBody : " + error.errorBody)
+                    Log.d(ContentValues.TAG, "onError errorDetail : " + error.errorDetail)
+                    Toast.makeText(applicationContext, "Network error: " + error.errorDetail, Toast.LENGTH_SHORT).show()
+                }
+            })
+    }
     private fun getToken(): String {
         val sharedPreference = this.getSharedPreferences("PREFERENCE_NAME", MODE_PRIVATE)
         return sharedPreference?.getString("token", "") ?: ""
