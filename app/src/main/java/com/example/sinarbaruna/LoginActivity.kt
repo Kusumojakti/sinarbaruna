@@ -74,7 +74,7 @@ class LoginActivity : AppCompatActivity() {
                                     Toast.LENGTH_LONG
                                 ).show()
                                 val intent =
-                                    Intent(this@LoginActivity, RegisterActivity::class.java)
+                                    Intent(this@LoginActivity, MasterDataActivity::class.java)
                                 startActivity(intent)
                                 finish()
 

@@ -21,6 +21,10 @@ class DataJadwal : AppCompatActivity() {
             binding.btnJadwalbaru.isEnabled = false
             binding.btnJadwalbaru.alpha = 0.5f // Mengubah tampilan tombol agar terlihat dinonaktifkan
         }
+        else if (userole == "manajer") {
+            binding.btnReviewjadwal.isEnabled = false
+            binding.btnReviewjadwal.alpha = 0.5f
+        }
 
         binding.btnJadwalbaru.setOnClickListener {
             val intent = Intent(this, JadwalBaruActivity::class.java)

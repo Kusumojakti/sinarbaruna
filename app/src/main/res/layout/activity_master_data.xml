@@ -57,6 +57,32 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="ID Moulding"
+                android:fontFamily="@font/montseratbold"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"/>
+
+            <EditText
+                android:id="@+id/edt_mouldingid"
+                android:layout_width="180dp"
+                android:layout_height="35dp"
+                android:background="@drawable/bgform"
+                android:fontFamily="@font/montseratmedium"
+                android:textAlignment="center"
+                android:textColorHint="@color/black"
+                android:layout_alignParentEnd="true"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Tanggal"
                 android:fontFamily="@font/montseratbold"
                 android:textColor="@color/white"

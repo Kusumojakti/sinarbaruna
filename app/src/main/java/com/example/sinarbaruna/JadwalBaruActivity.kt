@@ -4,6 +4,7 @@ import android.R
 import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.widget.ArrayAdapter
@@ -26,6 +27,14 @@ import android.graphics.Color
 import android.view.View
 import android.widget.AdapterView
 import androidx.compose.material3.Button
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import org.apache.poi.ss.usermodel.CellStyle
+import org.apache.poi.ss.usermodel.FillPatternType
+import org.apache.poi.ss.usermodel.IndexedColors
+import org.apache.poi.xssf.usermodel.XSSFWorkbook
+import java.io.File
+import java.io.FileOutputStream
 
 class JadwalBaruActivity : AppCompatActivity() {
     private lateinit var binding: ActivityJadwalBaruBinding
@@ -34,11 +43,12 @@ class JadwalBaruActivity : AppCompatActivity() {
     private var selectedRowIndex: Int? = null
     private val selectedRowIds = mutableSetOf<Int>()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityJadwalBaruBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        datajadwal = ArrayList()
 
         binding.btnEdit.setOnClickListener {
             val intent = Intent(this, InputStatusJadwalActivity::class.java)
@@ -55,12 +65,32 @@ class JadwalBaruActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+//        download excel
+        binding.downloadexcel.setOnClickListener {
+            if (datajadwal.isNotEmpty()) {
+                if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                    exportToExcel(datajadwal)
+                } else {
+                    ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+                }
+            } else {
+                Toast.makeText(this, "Tidak ada data untuk diekspor", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
+        binding.btnKembali.setOnClickListener {
+            val intent = Intent(this, MasterDataActivity::class.java)
+            startActivity(intent)
+        }
+
+
         val statusket = resources.getStringArray(com.example.sinarbaruna.R.array.keterangan)
         val dropdown = binding.keterangantable // Use view binding to access the spinner
 
         val adapter = ArrayAdapter(
             this,
-            android.R.layout.simple_spinner_item, statusket
+            R.layout.simple_spinner_item, statusket
         )
         dropdown.adapter = adapter
 
@@ -85,6 +115,20 @@ class JadwalBaruActivity : AppCompatActivity() {
         }
 
         fetchDataFromApi()
+    }
+
+//    penanganan proses write data
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == 1) {
+            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                if (::datajadwal.isInitialized && datajadwal.isNotEmpty()) {
+                    exportToExcel(datajadwal)
+                }
+            } else {
+                Toast.makeText(this, "Izin penyimpanan ditolak", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun fetchDataFromApi() {
@@ -118,6 +162,7 @@ class JadwalBaruActivity : AppCompatActivity() {
                                     keterangan = jadwalObject.getString("keterangan")
                                 )
                                 jadwalList.add(jadwal)
+                                datajadwal.add(jadwal)
                             }
                             Log.d(ContentValues.TAG, "Parsed Data: $jadwalList")
                             runOnUiThread {
@@ -138,14 +183,6 @@ class JadwalBaruActivity : AppCompatActivity() {
 
 
     private fun populateTable(jadwalList: List<dataJadwal>) {
-//        val idtable = binding.idtable
-//        val mouldingtable = binding.mouldingtable
-//        val tanggal_table = binding.tanggalTable
-//        val jenismould_table = binding.jenismouldTable
-//        val durasi_table = binding.durasiTable
-//        val pic_table = binding.picTable
-//        val keterangan_table = binding.keteranganTable
-
         val role = resources.getStringArray(com.example.sinarbaruna.R.array.keterangan)
 
 
@@ -255,5 +292,51 @@ class JadwalBaruActivity : AppCompatActivity() {
 
         }
     }
+
+    private fun exportToExcel(jadwalList: List<dataJadwal>) {
+        val workbook = XSSFWorkbook()
+        val sheet = workbook.createSheet("Jadwal")
+        val header = sheet.createRow(0)
+
+        val headerCellStyle = workbook.createCellStyle()
+        headerCellStyle.fillForegroundColor = IndexedColors.YELLOW.index
+            headerCellStyle.fillPattern = FillPatternType.SOLID_FOREGROUND
+
+        // Create header cells
+        val headers = arrayOf("ID", "ID Moulding", "Tanggal", "Type Moulding", "Durasi", "Mulai Tanggal", "User ID", "Keterangan")
+        for ((index, headerName) in headers.withIndex()) {
+            val cell = header.createCell(index)
+            cell.setCellValue(headerName)
+            cell.cellStyle = headerCellStyle
+        }
+
+        // Populate data rows
+        for ((rowIndex, jadwal) in jadwalList.withIndex()) {
+            val row = sheet.createRow(rowIndex + 1)
+            row.createCell(0).setCellValue(jadwal.id.toString())
+            row.createCell(1).setCellValue(jadwal.id_moulding)
+            row.createCell(2).setCellValue(jadwal.tanggal)
+            row.createCell(3).setCellValue(jadwal.type_moulding)
+            row.createCell(4).setCellValue(jadwal.durasi)
+            row.createCell(5).setCellValue(jadwal.mulai_tanggal)
+            row.createCell(6).setCellValue(jadwal.user_id)
+            row.createCell(7).setCellValue(jadwal.keterangan)
+        }
+
+        // Save to file
+        try {
+            val file = File(getExternalFilesDir(null), "Jadwal.xlsx")
+            val fileOut = FileOutputStream(file)
+            workbook.write(fileOut)
+            fileOut.close()
+            workbook.close()
+
+            Toast.makeText(this, "Data berhasil diekspor ke ${file.absolutePath}", Toast.LENGTH_LONG).show()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(this, "Gagal mengekspor data: ${e.message}", Toast.LENGTH_LONG).show()
+        }
+    }
+
 }
 
