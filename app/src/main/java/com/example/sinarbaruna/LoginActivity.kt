@@ -74,7 +74,8 @@ class LoginActivity : AppCompatActivity() {
                                     Toast.LENGTH_LONG
                                 ).show()
                                 val intent =
-                                    Intent(this@LoginActivity, MasterDataActivity::class.java)
+                                    Intent(this@LoginActivity, DashboardsActivity::class.java)
+                                intent.putExtra("role", "admin")
                                 startActivity(intent)
                                 finish()
 

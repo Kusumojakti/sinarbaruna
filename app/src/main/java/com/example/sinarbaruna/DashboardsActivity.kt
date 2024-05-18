@@ -1,6 +1,8 @@
 package com.example.sinarbaruna
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -32,8 +34,15 @@ class DashboardsActivity : AppCompatActivity() {
         }
 
         binding.btnBacktologin.setOnClickListener {
+            val preferences: SharedPreferences = this.getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
+            val editor = preferences.edit()
+            editor.clear()
+            editor.apply()
             val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
+            finish()
+
         }
     }
 }
