@@ -2,29 +2,20 @@ package com.example.sinarbaruna
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.example.sinarbaruna.databinding.ActivityDataJadwalBinding
 
 class DataJadwal : AppCompatActivity() {
     private lateinit var binding : ActivityDataJadwalBinding
-    private var userole: String? = null
+    private var userRole: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDataJadwalBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        userole = intent.getStringExtra("role")
-        if (userole == "kepala bagian") {
-            binding.btnJadwalbaru.isEnabled = false
-            binding.btnJadwalbaru.alpha = 0.5f // Mengubah tampilan tombol agar terlihat dinonaktifkan
-        }
-        else if (userole == "manajer") {
-            binding.btnReviewjadwal.isEnabled = false
-            binding.btnReviewjadwal.alpha = 0.5f
-        }
+        userRole = intent.getStringExtra("role")
 
         binding.btnJadwalbaru.setOnClickListener {
             val intent = Intent(this, JadwalBaruActivity::class.java)
@@ -46,4 +37,5 @@ class DataJadwal : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
 }

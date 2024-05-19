@@ -25,6 +25,7 @@ import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
 import com.example.sinarbaruna.databinding.ActivityReviewDataJadwalBinding
+import com.example.sinarbaruna.databinding.ActivityReviewJadwalKaryawanBinding
 import com.example.sinarbaruna.model.dataJadwal
 import org.apache.poi.ss.usermodel.FillPatternType
 import org.apache.poi.ss.usermodel.IndexedColors
@@ -33,21 +34,37 @@ import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
 
-class ReviewDataJadwalActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityReviewDataJadwalBinding
+class ReviewJadwalKaryawan : AppCompatActivity() {
+    private lateinit var binding: ActivityReviewJadwalKaryawanBinding
     private lateinit var datajadwal: ArrayList<dataJadwal>
     private var userole: String? = null
     private val PERMISSIONS_REQUEST_LOCATION = 100
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityReviewDataJadwalBinding.inflate(layoutInflater)
+        binding = ActivityReviewJadwalKaryawanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         datajadwal = ArrayList()
 
-        fetchDataKaryawan()
+        userole = intent.getStringExtra("role")
+        if (userole == "karyawan") {
+            binding.btnHapus.isEnabled = false
+            binding.btnHapus.alpha = 0.5f
+            binding.btnKembali.setOnClickListener {
+                val preferences: SharedPreferences = this.getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
+                val editor = preferences.edit()
+                editor.clear()
+                editor.apply()
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                finish()
+            }
+        }
 
-                //        download excel
+        fetchDataFromApi()
+
+        //        download excel
         binding.downloadexcel.setOnClickListener {
             if (datajadwal.isNotEmpty()) {
                 exportToExcel(datajadwal)
@@ -56,11 +73,22 @@ class ReviewDataJadwalActivity : AppCompatActivity() {
             }
         }
         binding.btnKembali.setOnClickListener {
-            val intent = Intent(this, DataJadwal::class.java)
-            startActivity(intent)
+            if (userole == "karyawan") {
+                val preferences: SharedPreferences = this.getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
+                val editor = preferences.edit()
+                editor.clear()
+                editor.apply()
+                val intent = Intent(this, LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                finish()
+            } else{
+                val intent = Intent(this, KepBagDataJadwal::class.java)
+                startActivity(intent)
+            }
         }
         binding.btnHapus.setOnClickListener {
-            val intent = Intent(this, InputStatusJadwalActivity::class.java)
+            val intent = Intent(this, InputStatusKepBag::class.java)
             startActivity(intent)
         }
     }
@@ -246,7 +274,7 @@ class ReviewDataJadwalActivity : AppCompatActivity() {
             row.addView(userNameTextView)
 
             val keteranganSpinner = Spinner(this).apply {
-                val adapter = ArrayAdapter<String>(this@ReviewDataJadwalActivity, R.layout.simple_spinner_item, role)
+                val adapter = ArrayAdapter<String>(this@ReviewJadwalKaryawan, R.layout.simple_spinner_item, role)
                 adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
                 setAdapter(adapter)
                 setSelection(adapter.getPosition(jadwal.keterangan))

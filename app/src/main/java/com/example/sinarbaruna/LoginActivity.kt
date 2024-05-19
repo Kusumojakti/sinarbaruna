@@ -6,21 +6,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.ui.Modifier
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONObjectRequestListener
 import com.example.sinarbaruna.databinding.ActivityLoginBinding
-import com.example.sinarbaruna.ui.theme.SinarbarunaTheme
 import org.json.JSONException
 import org.json.JSONObject
 
@@ -32,15 +23,21 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val sharedPreference = getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
+        val token = sharedPreference.getString("token", null)
+        val role = sharedPreference.getString("role", null)
+
+        Log.d("LoginActivity", "Token: $token, Role: $role")
+
+        if (token != null && role != null) {
+            navigateToRoleActivity(role)
+        }
+
         binding.btnLogin.setOnClickListener {
             verifikasilogin()
         }
-
-        binding.txtRegistered.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
-        }
     }
+
     private fun verifikasilogin() {
         val username = binding.edtUsername.text.toString().trim()
         val password = binding.edtPassword.text.toString().trim()
@@ -62,99 +59,61 @@ class LoginActivity : AppCompatActivity() {
                 override fun onResponse(response: JSONObject) {
                     try {
                         Log.d(ContentValues.TAG, response.toString())
-                        if (response.getString("success").equals("true")) {
+                        if (response.getString("success") == "true") {
                             val user = response.getJSONObject("user")
                             val role = user.getString("role")
+                            val shareToken = response.getString("token")
 
-                            if (role.equals("admin")) {
-                                Log.d("Login Admin Successfully", response.toString())
-                                Toast.makeText(
-                                    this@LoginActivity,
-                                    "Login Admin Successfully",
-                                    Toast.LENGTH_LONG
-                                ).show()
-                                val intent =
-                                    Intent(this@LoginActivity, DashboardsActivity::class.java)
-                                intent.putExtra("role", "admin")
-                                startActivity(intent)
-                                finish()
+                            val sharedPreference = getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
+                            val editor = sharedPreference.edit()
+                            editor.putString("token", shareToken)
+                            editor.putString("role", role)
+                            editor.apply()
 
-                                //sharetoken
-                                val shareToken = response.getString("token")
-                                val sharedPreference =  getSharedPreferences("PREFERENCE_NAME",
-                                    Context.MODE_PRIVATE)
-                                val editorToken = sharedPreference.edit()
-                                editorToken.putString("token",shareToken)
-                                editorToken.commit()
+                            Log.d("LoginActivity", "Saved Token: $shareToken, Role: $role")
 
-                            } else if (role.equals("manajer")) {
-                                Log.d("Login Manajer Successfully", response.toString())
-                                Toast.makeText(
-                                    this@LoginActivity,
-                                    "Login Manajer Successfully",
-                                    Toast.LENGTH_LONG
-                                ).show()
-                                val intent =
-                                    Intent(this@LoginActivity, DashboardsActivity::class.java)
-                                startActivity(intent)
-                                finish()
-
-                                //sharetoken
-                                val shareToken = response.getString("token")
-                                val sharedPreference =  getSharedPreferences("PREFERENCE_NAME",Context.MODE_PRIVATE)
-                                val editorToken = sharedPreference.edit()
-                                editorToken.putString("token",shareToken)
-                                editorToken.commit()
-                            }
-                            else if (role.equals("kepala bagian")) {
-                                Log.d("Login Kepala Bagian Successfully", response.toString())
-                                Toast.makeText(
-                                    this@LoginActivity,
-                                    "Login Kepala Bagian Successfully",
-                                    Toast.LENGTH_LONG
-                                ).show()
-                                val intent =
-                                    Intent(this@LoginActivity, DashboardsActivity::class.java)
-                                startActivity(intent)
-                                finish()
-
-                                //sharetoken
-                                val shareToken = response.getString("token")
-                                val sharedPreference =  getSharedPreferences("PREFERENCE_NAME",Context.MODE_PRIVATE)
-                                val editorToken = sharedPreference.edit()
-                                editorToken.putString("token",shareToken)
-                                editorToken.commit()
-                            }
-                            else {
-                                Log.d("Login Karyawan Successfully", response.toString())
-                                Toast.makeText(
-                                    this@LoginActivity,
-                                    "Login Karyawan Successfully",
-                                    Toast.LENGTH_LONG
-                                ).show()
-                                val intent =
-                                    Intent(this@LoginActivity, ReviewDataJadwalActivity::class.java)
-                                startActivity(intent)
-                                finish()
-
-                                //sharetoken
-                                val shareToken = response.getString("token")
-                                val sharedPreference =  getSharedPreferences("PREFERENCE_NAME",Context.MODE_PRIVATE)
-                                val editorToken = sharedPreference.edit()
-                                editorToken.putString("token",shareToken)
-                                editorToken.commit()
-                            }
+                            navigateToRoleActivity(role)
+                        } else {
+                            Toast.makeText(this@LoginActivity, "Login Failed", Toast.LENGTH_SHORT).show()
                         }
                     } catch (e: JSONException) {
                         e.printStackTrace()
-                        Toast.makeText(this@LoginActivity, "kesalahan", Toast.LENGTH_SHORT)
-                            .show()
+                        Toast.makeText(this@LoginActivity, "Error parsing response", Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onError(error: ANError) {
-                    Log.d("Login gagal", error.toString())
+                    Log.d("LoginActivity", "Login failed: $error")
+                    Toast.makeText(this@LoginActivity, "Login failed: $error", Toast.LENGTH_SHORT).show()
                 }
             })
+    }
+
+    private fun navigateToRoleActivity(role: String) {
+        val intent = when (role) {
+            "admin" -> {
+                val intent = Intent(this, DashboardsActivity::class.java)
+                intent.putExtra("role", "admin")
+            }
+            "manajer" -> {
+                val intent = Intent(this, DashboardsActivity::class.java)
+                intent.putExtra("role", "manajer")
+            }
+            "kepala bagian" -> {
+                val intent = Intent(this, KepBagDataJadwal::class.java)
+                intent.putExtra("role", "kepala bagian")
+            }
+            "karyawan" -> {
+                val intent = Intent(this, ReviewJadwalKaryawan::class.java)
+                intent.putExtra("role", "karyawan")
+            }
+            else -> {
+                Toast.makeText(this, "Unknown role", Toast.LENGTH_SHORT).show()
+                return
+            }
+        }
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
     }
 }

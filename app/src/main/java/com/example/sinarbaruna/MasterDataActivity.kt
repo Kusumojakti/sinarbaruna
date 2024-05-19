@@ -1,7 +1,9 @@
 package com.example.sinarbaruna
 
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -76,6 +78,7 @@ class MasterDataActivity : AppCompatActivity() {
         binding.btnKembali.setOnClickListener {
             val intent = Intent(this, DashboardsActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         binding.btnTambah.setOnClickListener {

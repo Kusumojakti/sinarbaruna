@@ -16,19 +16,20 @@ import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.JSONArrayRequestListener
 import com.androidnetworking.interfaces.JSONObjectRequestListener
 import com.example.sinarbaruna.databinding.ActivityInputStatusJadwalBinding
+import com.example.sinarbaruna.databinding.ActivityInputStatusKepBagBinding
 import com.example.sinarbaruna.model.dataJadwal
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 
-class InputStatusJadwalActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityInputStatusJadwalBinding
+class InputStatusKepBag : AppCompatActivity() {
+    private lateinit var binding: ActivityInputStatusKepBagBinding
     private var selectedProcess: String? = null
     private var searchedId: Int? = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityInputStatusJadwalBinding.inflate(layoutInflater)
+        binding = ActivityInputStatusKepBagBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val statusket = resources.getStringArray(R.array.keterangan)
@@ -49,7 +50,7 @@ class InputStatusJadwalActivity : AppCompatActivity() {
             ) {
                 selectedProcess = statusket[position]
                 Toast.makeText(
-                    this@InputStatusJadwalActivity,
+                    this@InputStatusKepBag,
                     "Pilih Keterangan $selectedProcess",
                     Toast.LENGTH_SHORT
                 ).show()
@@ -89,7 +90,7 @@ class InputStatusJadwalActivity : AppCompatActivity() {
             }
         }
         binding.btnKembali.setOnClickListener {
-            val intent = Intent(this, DataJadwal::class.java)
+            val intent = Intent(this, KepBagDataJadwal::class.java)
             startActivity(intent)
         }
     }
@@ -183,8 +184,8 @@ class InputStatusJadwalActivity : AppCompatActivity() {
                     try {
                         Log.d(ContentValues.TAG, response.toString())
                         if (response.getString("success") == "true") {
-                            Toast.makeText(this@InputStatusJadwalActivity, "Update successful", Toast.LENGTH_SHORT).show()
-                            val intent = Intent(this@InputStatusJadwalActivity, JadwalBaruActivity::class.java)
+                            Toast.makeText(this@InputStatusKepBag, "Update successful", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this@InputStatusKepBag, JadwalBaruActivity::class.java)
                             startActivity(intent)
                             finish()
                         } else {
@@ -221,8 +222,8 @@ class InputStatusJadwalActivity : AppCompatActivity() {
                     try {
                         Log.d(ContentValues.TAG, response.toString())
                         if (response.getString("success") == "true") {
-                            Toast.makeText(this@InputStatusJadwalActivity, "Delete successful", Toast.LENGTH_SHORT).show()
-                            val intent = Intent(this@InputStatusJadwalActivity, JadwalBaruActivity::class.java)
+                            Toast.makeText(this@InputStatusKepBag, "Delete successful", Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this@InputStatusKepBag, JadwalBaruActivity::class.java)
                             startActivity(intent)
                             finish()
                         } else {

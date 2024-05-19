@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ReviewJadwalKaryawan">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        android:padding="25dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CV. Sinar Baruna Sejahtera"
+            android:fontFamily="@font/montseratbold"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="25dp"
+        android:background="@color/primary">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Review Jadwal Baru"
+            android:fontFamily="@font/montseratbold"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textAllCaps="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/downloadexcel"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/downloadexcel"
+                android:layout_alignParentEnd="true"/>
+
+        </RelativeLayout>
+
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TableLayout
+                        android:id="@+id/tablelayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:stretchColumns="*">
+
+                        <TableRow
+                            android:background="#51B435"
+                            android:padding="10dp">
+                            <TextView
+                                android:id="@+id/idtable"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="2dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:text="No" />
+                            <TextView
+                                android:id="@+id/mouldingtable"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="2dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:text="Id Moulding" />
+                            <TextView
+                                android:id="@+id/tanggal_table"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="2dp"                           android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:text="Tanggal" />
+                            <TextView
+                                android:id="@+id/jenismould_table"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="2dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:text="Jenis Moulding" />
+                            <TextView
+                                android:id="@+id/durasi_table"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="2dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:text="Durasi" />
+                            <TextView
+                                android:id="@+id/tanggalmulai_table"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="2dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:text="Mulai Tanggal" />
+                            <TextView
+                                android:id="@+id/pic_table"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="2dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:text="Pic" />
+                            <Spinner
+                                android:id="@+id/keterangan_table"
+                                android:layout_width="wrap_content"
+                                android:layout_height="48dp"
+                                android:layout_weight="1"
+                                android:padding="2dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:spinnerMode="dropdown"/>
+                            <CheckedTextView
+                                android:id="@+id/checkbox"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:padding="2dp"
+                                android:textStyle="bold"
+                                android:textColor="@color/black"
+                                android:text="      " />
+                        </TableRow>
+                    </TableLayout>
+                </HorizontalScrollView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp">
+                        <Button
+                            android:id="@+id/btn_hapus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Hapus"
+                            android:textAllCaps="false"
+                            android:fontFamily="@font/montseratbold" />
+                    <!--                    <Button-->
+                    <!--                        android:id="@+id/btn_edit"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:layout_gravity="center"-->
+                    <!--                        android:text="Edit"-->
+                    <!--                        android:textAllCaps="false"-->
+                    <!--                        android:layout_marginStart="50dp"-->
+                    <!--                        android:fontFamily="@font/montseratbold"/>-->
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="30dp">
+
+                    <Button
+                        android:id="@+id/btn_kembali"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Kembali"
+                        android:textAllCaps="false"
+                        android:fontFamily="@font/montseratbold"/>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</LinearLayout>

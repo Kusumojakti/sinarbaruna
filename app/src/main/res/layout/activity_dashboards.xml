@@ -63,6 +63,17 @@
             android:text="Data Jadwal"
             android:textAllCaps="false"
             android:fontFamily="@font/montseratbold"
+            android:layout_alignParentEnd="true" />
+
+        <Button
+            android:id="@+id/btn_regist"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:text="Register User"
+            android:textAllCaps="false"
+            android:fontFamily="@font/montseratbold"
             android:layout_alignParentEnd="true"
             android:layout_marginBottom="80dp"/>
 

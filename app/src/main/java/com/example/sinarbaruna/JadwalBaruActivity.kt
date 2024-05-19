@@ -1,5 +1,6 @@
 package com.example.sinarbaruna
 
+import android.Manifest
 import android.R
 import android.content.ContentValues
 import android.content.Context
@@ -24,6 +25,8 @@ import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
 import android.graphics.Color
+import android.os.Build
+import android.os.Environment
 import android.view.View
 import android.widget.AdapterView
 import androidx.compose.material3.Button
@@ -42,6 +45,7 @@ class JadwalBaruActivity : AppCompatActivity() {
     private var selectedProcess: String? = null
     private var selectedRowIndex: Int? = null
     private val selectedRowIds = mutableSetOf<Int>()
+    private val PERMISSIONS_REQUEST_LOCATION = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,11 +72,7 @@ class JadwalBaruActivity : AppCompatActivity() {
 //        download excel
         binding.downloadexcel.setOnClickListener {
             if (datajadwal.isNotEmpty()) {
-                if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                    exportToExcel(datajadwal)
-                } else {
-                    ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
-                }
+                exportToExcel(datajadwal)
             } else {
                 Toast.makeText(this, "Tidak ada data untuk diekspor", Toast.LENGTH_SHORT).show()
             }
@@ -80,7 +80,7 @@ class JadwalBaruActivity : AppCompatActivity() {
 
 
         binding.btnKembali.setOnClickListener {
-            val intent = Intent(this, MasterDataActivity::class.java)
+            val intent = Intent(this, DataJadwal::class.java)
             startActivity(intent)
         }
 
@@ -120,13 +120,16 @@ class JadwalBaruActivity : AppCompatActivity() {
 //    penanganan proses write data
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 1) {
-            if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                if (::datajadwal.isInitialized && datajadwal.isNotEmpty()) {
-                    exportToExcel(datajadwal)
+        // Check and request WRITE_EXTERNAL_STORAGE permission
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    )) {
+
+                } else {
+                    ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), PERMISSIONS_REQUEST_LOCATION)
                 }
-            } else {
-                Toast.makeText(this, "Izin penyimpanan ditolak", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -325,13 +328,13 @@ class JadwalBaruActivity : AppCompatActivity() {
 
         // Save to file
         try {
-            val file = File(getExternalFilesDir(null), "Jadwal.xlsx")
+            val file = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "Jadwal.xlsx")
             val fileOut = FileOutputStream(file)
             workbook.write(fileOut)
             fileOut.close()
             workbook.close()
 
-            Toast.makeText(this, "Data berhasil diekspor ke ${file.absolutePath}", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "Data berhasil diekspor ", Toast.LENGTH_LONG).show()
         } catch (e: Exception) {
             e.printStackTrace()
             Toast.makeText(this, "Gagal mengekspor data: ${e.message}", Toast.LENGTH_LONG).show()

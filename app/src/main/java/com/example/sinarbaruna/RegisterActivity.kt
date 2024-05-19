@@ -33,6 +33,11 @@ class RegisterActivity : AppCompatActivity() {
             registerUser()
         }
 
+        binding.btnKembali.setOnClickListener {
+            val intent = Intent(this, DashboardsActivity::class.java)
+            startActivity(intent)
+        }
+
         val role = resources.getStringArray(R.array.bagian)
         dropdown = findViewById(R.id.dropdown_menu)
         if (dropdown != null) {
@@ -83,8 +88,8 @@ class RegisterActivity : AppCompatActivity() {
         AndroidNetworking.post("http://sinarbaruna.d2l.my.id/api/user/karyawan")
             .addJSONObjectBody(jsonObject)
             .addHeaders("Content-Type", "application/json")
+            .addHeaders("Authorization", "Bearer $token")
             .setPriority(Priority.MEDIUM)
-            .addHeaders("token", "Bearer" + " " + token)
             .build()
             .getAsJSONObject(object : JSONObjectRequestListener {
                 override fun onResponse(response: JSONObject) {
@@ -92,7 +97,7 @@ class RegisterActivity : AppCompatActivity() {
                         Log.d(ContentValues.TAG, response.toString())
                         if (response.getString("success") == "true") {
                             Toast.makeText(this@RegisterActivity, "Registration successful", Toast.LENGTH_SHORT).show()
-                            val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+                            val intent = Intent(this@RegisterActivity, DashboardsActivity::class.java)
                             startActivity(intent)
                             finish()
                         } else {
