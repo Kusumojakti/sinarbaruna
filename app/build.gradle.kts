@@ -77,6 +77,7 @@ dependencies {
     implementation ("org.apache.poi:poi:5.2.3")
     implementation ("org.apache.poi:poi-ooxml:5.2.3")
     implementation ("org.apache.xmlbeans:xmlbeans:5.0.2")
+    implementation ("com.chaos.view:pinview:1.4.4")
 
 
 

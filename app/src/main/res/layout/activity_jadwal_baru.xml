@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,14 +7,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/primary"
     tools:context=".JadwalBaruActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/headerLayout"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:orientation="vertical"
         android:padding="25dp"
-        android:gravity="center">
+        android:background="@color/white"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
@@ -22,183 +26,184 @@
             android:text="CV. Sinar Baruna Sejahtera"
             android:fontFamily="@font/montseratbold"
             android:textColor="@color/black"
-            android:textSize="18sp"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="25dp"
-        android:background="@color/primary">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Jadwal Baru"
-            android:fontFamily="@font/montseratbold"
-            android:textColor="@color/white"
             android:textSize="18sp"
-            android:textAllCaps="true"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            android:padding="25dp"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/montseratbold"
+                android:text="Jadwal Baru"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="18sp"/>
             <ImageView
                 android:id="@+id/downloadexcel"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:src="@drawable/downloadexcel"
-                android:layout_alignParentEnd="true"/>
-
-        </RelativeLayout>
+                android:layout_gravity="end"/>
 
 
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="25dp"
+                tools:layout_editor_absoluteY="75dp">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                <TableLayout
+                    android:id="@+id/tablelayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:stretchColumns="*">
+
+                    <TableRow
+                        android:background="#51B435"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="2dp"
+                            android:text="No"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="2dp"
+                            android:text="Id Moulding"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="2dp"
+                            android:text="Tanggal"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="2dp"
+                            android:text="Jenis Moulding"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="2dp"
+                            android:text="Durasi"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="2dp"
+                            android:text="Mulai Tanggal"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="2dp"
+                            android:text="Pic"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <Spinner
+                            android:id="@+id/keterangantable"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="2dp"
+                            android:spinnerMode="dropdown"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+                    </TableRow>
+                </TableLayout>
+            </HorizontalScrollView>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp">
 
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TableLayout
-                        android:id="@+id/tablelayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="10dp"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:stretchColumns="*">
-
-                        <TableRow
-                            android:background="#51B435"
-                            android:padding="10dp">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="2dp"
-                                android:textStyle="bold"
-                                android:textColor="@color/black"
-                                android:text="No" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="2dp"
-                                android:textStyle="bold"
-                                android:textColor="@color/black"
-                                android:text="Id Moulding" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="2dp"                           android:textStyle="bold"
-                                android:textColor="@color/black"
-                                android:text="Tanggal" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="2dp"
-                                android:textStyle="bold"
-                                android:textColor="@color/black"
-                                android:text="Jenis Moulding" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="2dp"
-                                android:textStyle="bold"
-                                android:textColor="@color/black"
-                                android:text="Durasi" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="2dp"
-                                android:textStyle="bold"
-                                android:textColor="@color/black"
-                                android:text="Mulai Tanggal" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="2dp"
-                                android:textStyle="bold"
-                                android:textColor="@color/black"
-                                android:text="Pic" />
-                            <Spinner
-                                android:id="@+id/keterangantable"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:padding="2dp"
-                                android:textStyle="bold"
-                                android:textColor="@color/black"
-                                android:spinnerMode="dropdown"/>
-                        </TableRow>
-                    </TableLayout>
-                </HorizontalScrollView>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp">
-                    <Button
-                        android:id="@+id/btn_tambah"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Tambah"
-                        android:textAllCaps="false"
-                        android:fontFamily="@font/montseratbold"/>
-                    <Button
-                        android:id="@+id/btn_edit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Edit"
-                        android:textAllCaps="false"
-                        android:layout_marginStart="50dp"
-                        android:fontFamily="@font/montseratbold"/>
-                    <Button
-                        android:id="@+id/btn_hapus"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Hapus"
-                        android:onClick="onDeletedClicked"
-                        android:textAllCaps="false"
-                        android:fontFamily="@font/montseratbold"
-                        android:layout_marginStart="50dp"
-                        android:layout_alignParentEnd="true"/>
-                </LinearLayout>
-
-                <LinearLayout
+                <Button
+                    android:id="@+id/btn_tambah"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="30dp">
+                    android:fontFamily="@font/montseratbold"
+                    android:text="Tambah"
+                    android:textAllCaps="false" />
 
-                    <Button
-                        android:id="@+id/btn_kembali"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Kembali"
-                        android:textAllCaps="false"
-                        android:fontFamily="@font/montseratbold"/>
-                </LinearLayout>
+                <Button
+                    android:id="@+id/btn_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="50dp"
+                    android:fontFamily="@font/montseratbold"
+                    android:text="Edit"
+                    android:textAllCaps="false" />
+                <Button
+                    android:id="@+id/btn_hapus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="50dp"
+                    android:fontFamily="@font/montseratbold"
+                    android:onClick="onDeletedClicked"
+                    android:text="Hapus"
+                    android:textAllCaps="false" />
             </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
-</LinearLayout>
+
+            <Button
+                android:id="@+id/btn_kembali"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/montseratbold"
+                android:text="Kembali"
+                android:textAllCaps="false" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

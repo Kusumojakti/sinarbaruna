@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,14 +7,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".KepBagDataJadwal">
+    tools:context=".DataJadwal">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/headerLayout"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:orientation="vertical"
         android:padding="25dp"
-        android:gravity="center">
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
@@ -22,62 +24,82 @@
             android:text="CV. Sinar Baruna Sejahtera"
             android:fontFamily="@font/montseratbold"
             android:textColor="@color/black"
-            android:textSize="18sp"/>
-    </LinearLayout>
-    <LinearLayout
+            android:textSize="18sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/primary"
         android:orientation="vertical"
         android:padding="25dp"
-        android:background="@color/primary">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="-170dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Data Jadwal"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/montseratbold"
+            android:text="Data Jadwal"
+            android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="18sp"
-            android:textAllCaps="true"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
 
         <Button
             android:id="@+id/btn_reviewjadwal"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
+            android:fontFamily="@font/montseratbold"
             android:text="Review Jadwal"
             android:textAllCaps="false"
-            android:fontFamily="@font/montseratbold"
-            android:layout_alignParentEnd="true"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="86dp" />
 
         <Button
             android:id="@+id/btn_statusjadwal"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
+            android:fontFamily="@font/montseratbold"
             android:text="Status Jadwal"
             android:textAllCaps="false"
-            android:fontFamily="@font/montseratbold"
-            android:layout_alignParentEnd="true"/>
-
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="159dp" />
 
         <Button
             android:id="@+id/backbtn"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_gravity="center"
-            android:layout_marginTop="170dp"
+            android:fontFamily="@font/montseratbold"
             android:text="Kembali"
             android:textAllCaps="true"
-            android:fontFamily="@font/montseratbold"
-            android:layout_alignParentEnd="true" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="384dp" />
 
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

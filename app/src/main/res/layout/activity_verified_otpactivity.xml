@@ -3,116 +3,103 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".DataJadwal">
+    tools:context=".VerifiedOTPActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/headerLayout"
+        android:id="@+id/constraint1"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:orientation="vertical"
-        android:padding="25dp"
-        android:gravity="center"
+        android:background="@color/white"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CV. Sinar Baruna Sejahtera"
             android:fontFamily="@font/montseratbold"
+            android:text="CV. Sinar Baruna Sejahtera"
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:layout_editor_absoluteX="153dp"
+            tools:layout_editor_absoluteY="91dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="529dp"
         android:background="@color/primary"
-        android:orientation="vertical"
-        android:padding="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/headerLayout"
-        app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteX="-170dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="40dp"
             android:fontFamily="@font/montseratbold"
-            android:text="Data Jadwal"
+            android:text="Verifikasi OTP"
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.049" />
 
+
+        <com.chaos.view.PinView
+            style="@style/PinWidget.PinView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:cursorVisible="true"
+            android:inputType="text"
+            android:itemBackground="@color/white"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:cursorWidth="2dp"
+            app:hideLineWhenFilled="true"
+            app:itemCount="5"
+            app:itemHeight="48dp"
+            app:itemRadius="4dp"
+            app:itemSpacing="8dp"
+            app:itemWidth="48dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.232"
+            app:lineColor="@color/black"
+            app:lineWidth="2dp"
+            app:viewType="rectangle" />
 
         <Button
-            android:id="@+id/btn_reviewjadwal"
-            android:layout_width="200dp"
+            android:id="@+id/btn_kirim"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_gravity="center"
             android:fontFamily="@font/montseratbold"
-            android:text="Review Jadwal"
+            android:text="Kirim"
             android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="86dp" />
-
-        <Button
-            android:id="@+id/btn_statusjadwal"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="center"
-            android:fontFamily="@font/montseratbold"
-            android:text="Status Jadwal"
-            android:textAllCaps="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="159dp" />
-
-        <Button
-            android:id="@+id/btn_jadwalbaru"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="center"
-            android:fontFamily="@font/montseratbold"
-            android:text="Jadwal Baru"
-            android:textAllCaps="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="232dp" />
-
-        <Button
-            android:id="@+id/backbtn"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_gravity="center"
-            android:fontFamily="@font/montseratbold"
-            android:text="Kembali"
-            android:textAllCaps="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="384dp" />
-
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.434" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

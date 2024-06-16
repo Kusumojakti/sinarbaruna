@@ -1,130 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".RegisterActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/headerLayout"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:orientation="vertical"
         android:padding="25dp"
-        android:gravity="center">
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/textViewHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="CV. Sinar Baruna Sejahtera"
             android:fontFamily="@font/montseratbold"
             android:textColor="@color/black"
-            android:textSize="18sp"/>
-    </LinearLayout>
-    <LinearLayout
+            android:textSize="18sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="25dp"
-        android:background="@color/primary">
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Daftar Akun"
-            android:fontFamily="@font/montseratbold"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textAllCaps="true"
-            android:layout_gravity="center"
-            android:layout_marginBottom="30dp"
-            android:layout_marginTop="10dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nama"
-            android:fontFamily="@font/montseratbold"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="20dp"/>
-
-        <EditText
-            android:id="@+id/edt_username"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:background="@drawable/bgform"
-            android:fontFamily="@font/montseratmedium"
-            android:textAlignment="center"
-            android:textColorHint="@color/black"
-            android:layout_marginBottom="20dp"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="25dp"
+            android:background="@color/primary">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bagian"
-            android:fontFamily="@font/montseratbold"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="20dp"/>
-
-        <Spinner
-            android:id="@+id/dropdown_menu"
-            android:layout_width="match_parent"
-            android:spinnerMode="dropdown"
-            android:layout_height="35dp"
-            android:background="@drawable/bgform"
-            android:layout_marginBottom="20dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Password"
-            android:fontFamily="@font/montseratbold"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="20dp"/>
-
-        <EditText
-            android:id="@+id/edt_password"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:background="@drawable/bgform"
-            android:textAlignment="center"
-            android:fontFamily="@font/montseratmedium"
-            android:textColorHint="@color/black" />
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/btn_daftar"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:text="Daftar"
-                android:textAllCaps="false"
-                android:fontFamily="@font/montseratbold"/>
-            <Button
-                android:id="@+id/btn_kembali"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="30dp"
-                android:text="Kembali"
-                android:textAllCaps="false"
+                android:text="Daftar Akun"
                 android:fontFamily="@font/montseratbold"
-                android:layout_alignParentEnd="true"/>
-        </RelativeLayout>
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textAllCaps="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="10dp"/>
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama"
+                android:fontFamily="@font/montseratbold"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"/>
+
+            <EditText
+                android:id="@+id/edt_username"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@drawable/bgform"
+                android:fontFamily="@font/montseratmedium"
+                android:textAlignment="center"
+                android:textColorHint="@color/black"
+                android:layout_marginBottom="20dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:fontFamily="@font/montseratbold"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"/>
+
+            <EditText
+                android:id="@+id/edt_email"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@drawable/bgform"
+                android:fontFamily="@font/montseratmedium"
+                android:textAlignment="center"
+                android:textColorHint="@color/black"
+                android:layout_marginBottom="20dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bagian"
+                android:fontFamily="@font/montseratbold"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"/>
+
+            <Spinner
+                android:id="@+id/dropdown_menu"
+                android:layout_width="match_parent"
+                android:spinnerMode="dropdown"
+                android:layout_height="35dp"
+                android:background="@drawable/bgform"
+                android:layout_marginBottom="20dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password"
+                android:fontFamily="@font/montseratbold"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"/>
+
+            <EditText
+                android:id="@+id/edt_password"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@drawable/bgform"
+                android:textAlignment="center"
+                android:fontFamily="@font/montseratmedium"
+                android:textColorHint="@color/black" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/btn_daftar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="30dp"
+                    android:text="Daftar"
+                    android:textAllCaps="false"
+                    android:fontFamily="@font/montseratbold"/>
+                <Button
+                    android:id="@+id/btn_kembali"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="30dp"
+                    android:text="Kembali"
+                    android:textAllCaps="false"
+                    android:fontFamily="@font/montseratbold"
+                    android:layout_alignParentEnd="true"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

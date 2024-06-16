@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/primary"
     tools:context=".InputDataJadwalBaruActivity">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/headerLayout"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="200dp"
         android:orientation="vertical"
         android:padding="25dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
@@ -21,88 +25,110 @@
             android:text="CV. Sinar Baruna Sejahtera"
             android:fontFamily="@font/montseratbold"
             android:textColor="@color/black"
-            android:textSize="18sp"/>
-    </LinearLayout>
+            android:textSize="18sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="25dp"
-            android:background="@color/primary">
+            android:padding="25dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Input Jadwal Baru"
-                android:fontFamily="@font/montseratbold"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textAllCaps="true"
                 android:layout_gravity="center"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="20dp"
-                android:layout_marginTop="10dp"/>
+                android:fontFamily="@font/montseratbold"
+                android:text="Input Jadwal Baru"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tanggal"
+                    android:layout_gravity="center"
                     android:fontFamily="@font/montseratbold"
+                    android:text="Tanggal"
                     android:textColor="@color/white"
                     android:textSize="14sp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"/>
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
                     android:id="@+id/input_tanggal"
                     android:layout_width="180dp"
                     android:layout_height="35dp"
-                    android:textAlignment="center"
-                    android:textColorHint="@color/black"
-                    android:layout_marginTop="10dp"
+                    android:layout_gravity="center"
                     android:background="@drawable/bgform"
-                    android:layout_alignParentEnd="true"/>
-            </RelativeLayout>
+                    android:textColorHint="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.991"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView2"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp">
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Type Moulding"
+                    android:layout_gravity="center"
                     android:fontFamily="@font/montseratbold"
+                    android:text="Type Moulding"
                     android:textColor="@color/white"
                     android:textSize="14sp"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginTop="10dp"/>
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
                     android:id="@+id/typemoulding"
                     android:layout_width="180dp"
                     android:layout_height="35dp"
+                    android:layout_marginStart="72dp"
+                    android:background="@drawable/bgform"
                     android:textAlignment="center"
                     android:textColorHint="@color/black"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/bgform"
-                    android:layout_alignParentEnd="true"/>
-            </RelativeLayout>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.991"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_editor_absoluteY="0dp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -111,10 +137,13 @@
                     android:text="Durasi"
                     android:fontFamily="@font/montseratbold"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginTop="10dp"/>
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <EditText
                     android:id="@+id/durasi"
@@ -122,26 +151,32 @@
                     android:layout_height="35dp"
                     android:textAlignment="center"
                     android:textColorHint="@color/black"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="135dp"
                     android:background="@drawable/bgform"
-                    android:layout_alignParentEnd="true"/>
-            </RelativeLayout>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.991"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mulai Tanggal"
-                    android:fontFamily="@font/montseratbold"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginTop="10dp"/>
+                    android:fontFamily="@font/montseratbold"
+                    android:text="Mulai Tanggal"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
                     android:id="@+id/mulaitanggal"
@@ -149,26 +184,32 @@
                     android:layout_height="35dp"
                     android:textAlignment="center"
                     android:textColorHint="@color/black"
-                    android:layout_marginTop="10dp"
                     android:background="@drawable/bgform"
-                    android:layout_alignParentEnd="true"/>
-            </RelativeLayout>
+                    android:layout_alignParentEnd="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.991"
+                    app:layout_constraintTop_toTopOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="20dp"
                     android:fontFamily="@font/montseratbold"
                     android:text="Pic"
                     android:textColor="@color/white"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <EditText
                     android:id="@+id/edt_pic"
@@ -176,15 +217,18 @@
                     android:layout_height="35dp"
                     android:textAlignment="center"
                     android:textColorHint="@color/black"
-                    android:layout_marginTop="10dp"
                     android:background="@drawable/bgform"
-                    android:layout_alignParentEnd="true"/>
-            </RelativeLayout>
+                    android:layout_alignParentEnd="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.991"
+                    app:layout_constraintTop_toTopOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -194,8 +238,11 @@
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginTop="20dp"/>
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <EditText
                     android:id="@+id/input_idmoulding"
@@ -203,35 +250,38 @@
                     android:layout_height="35dp"
                     android:textAlignment="center"
                     android:textColorHint="@color/black"
-                    android:layout_marginTop="10dp"
                     android:background="@drawable/bgform"
-                    android:layout_alignParentEnd="true"/>
-            </RelativeLayout>
+                    android:layout_alignParentEnd="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.991"
+                    app:layout_constraintTop_toTopOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="10dp">
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
                 <Button
                     android:id="@+id/btn_kembali"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
+                    android:fontFamily="@font/montseratbold"
                     android:text="Kembali"
-                    android:textAllCaps="false"
-                    android:fontFamily="@font/montseratbold" />
+                    android:textAllCaps="false" />
+
                 <Button
                     android:id="@+id/btn_tambah"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/montseratbold"
                     android:text="Simpan"
-                    android:textAllCaps="false"
-                    android:fontFamily="@font/montseratbold" />
+                    android:textAllCaps="false" />
             </LinearLayout>
-
         </LinearLayout>
-
     </ScrollView>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
