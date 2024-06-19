@@ -57,21 +57,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!--        <EditText-->
-<!--            android:id="@+id/edt_username"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="48dp"-->
-<!--            android:layout_marginTop="40dp"-->
-<!--            android:background="@drawable/bgform"-->
-<!--            android:fontFamily="@font/montseratmedium"-->
-<!--            android:hint="username"-->
-<!--            android:textAlignment="center"-->
-<!--            android:textColorHint="@color/black"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintHorizontal_bias="0.0"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/textViewTitle" />-->
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/layoutemail"
             android:layout_width="match_parent"
@@ -136,42 +121,27 @@
             android:layout_marginTop="32dp"
             android:fontFamily="@font/montseratmedium"
             android:text="Lupa Password?"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/layoutpass" />
 
-        <TextView
-            android:id="@+id/txt_registered"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="24dp"
-            android:fontFamily="@font/montseratmedium"
-            android:text="Belum memiliki akses?"
-            android:textColor="@color/black"
-            android:textSize="14sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/forgotpassword" />
 
         <Button
             android:id="@+id/btn_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="40dp"
             android:fontFamily="@font/montseratbold"
             android:text="Login"
             android:textAllCaps="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txt_registered" />
+            app:layout_constraintTop_toBottomOf="@id/forgotpassword" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

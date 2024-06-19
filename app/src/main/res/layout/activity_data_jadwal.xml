@@ -6,7 +6,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".DataJadwal">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,11 +37,10 @@
         android:orientation="vertical"
         android:padding="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/headerLayout"
-        app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteX="-170dp">
+        app:layout_constraintTop_toBottomOf="@id/headerLayout">
 
         <TextView
+            android:id="@+id/textViewHeader"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -52,67 +50,63 @@
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
-
+            app:layout_constraintBottom_toTopOf="@id/btn_reviewjadwal" />
 
         <Button
             android:id="@+id/btn_reviewjadwal"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_gravity="center"
             android:fontFamily="@font/montseratbold"
             android:text="Review Jadwal"
             android:textAllCaps="false"
+            app:layout_constraintTop_toBottomOf="@id/textViewHeader"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="86dp" />
+            android:layout_marginTop="20dp" />
 
         <Button
             android:id="@+id/btn_statusjadwal"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_gravity="center"
             android:fontFamily="@font/montseratbold"
             android:text="Status Jadwal"
             android:textAllCaps="false"
+            app:layout_constraintTop_toBottomOf="@id/btn_reviewjadwal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="159dp" />
+            android:layout_marginTop="20dp" />
 
         <Button
             android:id="@+id/btn_jadwalbaru"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_gravity="center"
             android:fontFamily="@font/montseratbold"
             android:text="Jadwal Baru"
             android:textAllCaps="false"
+            app:layout_constraintTop_toBottomOf="@id/btn_statusjadwal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="232dp" />
+            android:layout_marginTop="20dp" />
 
         <Button
             android:id="@+id/backbtn"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
             android:layout_gravity="center"
             android:fontFamily="@font/montseratbold"
             android:text="Kembali"
             android:textAllCaps="true"
+            app:layout_constraintTop_toBottomOf="@id/btn_jadwalbaru"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="384dp" />
-
+            android:layout_marginTop="20dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

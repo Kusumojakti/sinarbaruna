@@ -13,6 +13,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
+import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TableRow
@@ -48,7 +49,7 @@ class ReviewJadwalKaryawan : AppCompatActivity() {
 
         userole = intent.getStringExtra("role")
         if (userole == "karyawan") {
-            binding.btnHapus.isEnabled = false
+            binding.btnHapus.visibility = View.GONE
             binding.btnHapus.alpha = 0.5f
             binding.btnKembali.setOnClickListener {
                 val preferences: SharedPreferences = this.getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)

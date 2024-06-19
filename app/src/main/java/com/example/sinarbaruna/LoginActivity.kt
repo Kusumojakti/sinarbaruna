@@ -36,6 +36,12 @@ class LoginActivity : AppCompatActivity() {
         binding.btnLogin.setOnClickListener {
             verifikasilogin()
         }
+
+        binding.forgotpassword.setOnClickListener {
+            val intent = Intent(this, ForgotPasswordActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun verifikasilogin() {
@@ -84,7 +90,7 @@ class LoginActivity : AppCompatActivity() {
 
                 override fun onError(error: ANError) {
                     Log.d("LoginActivity", "Login failed: $error")
-                    Toast.makeText(this@LoginActivity, "Login failed: $error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, "Login failed: username/password anda salah", Toast.LENGTH_SHORT).show()
                 }
             })
     }
