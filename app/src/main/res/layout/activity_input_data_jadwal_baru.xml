@@ -82,6 +82,7 @@
                     android:layout_width="180dp"
                     android:layout_height="35dp"
                     android:layout_gravity="center"
+                    android:textAlignment="center"
                     android:background="@drawable/bgform"
                     android:textColorHint="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"

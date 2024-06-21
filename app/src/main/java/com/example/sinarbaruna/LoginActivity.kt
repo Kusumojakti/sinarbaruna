@@ -56,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
             e.printStackTrace()
         }
 
-        AndroidNetworking.post("http://sinarbaruna.d2l.my.id/api/login")
+        AndroidNetworking.post("https://sinarbaruna.zegion.cloud/public/api/login")
             .addJSONObjectBody(jsonObject)
             .addHeaders("Content-Type", "application/json")
             .setPriority(Priority.MEDIUM)

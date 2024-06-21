@@ -114,7 +114,7 @@ class ReviewJadwalKaryawan : AppCompatActivity() {
         val token = sharedPreference?.getString("token", "")
         Log.d(ContentValues.TAG, "Token: $token")
 
-        AndroidNetworking.get("http://sinarbaruna.d2l.my.id/api/bagian")
+        AndroidNetworking.get("https://sinarbaruna.zegion.cloud/public/api/bagian")
             .addHeaders("Content-Type", "application/json")
             .addHeaders("Authorization", "Bearer $token")
             .build()
@@ -163,7 +163,7 @@ class ReviewJadwalKaryawan : AppCompatActivity() {
         val token = sharedPreference?.getString("token", "")
         Log.d(ContentValues.TAG, "Token: $token")
 
-        AndroidNetworking.get("http://sinarbaruna.d2l.my.id/api/jadwal")
+        AndroidNetworking.get("https://sinarbaruna.zegion.cloud/public/api/jadwal")
             .addHeaders("Content-Type", "application/json")
             .addHeaders("Authorization", "Bearer $token")
             .build()
@@ -209,14 +209,6 @@ class ReviewJadwalKaryawan : AppCompatActivity() {
 
 
     private fun populateTable(jadwalList: List<dataJadwal>) {
-//        val idtable = binding.idtable
-//        val mouldingtable = binding.mouldingtable
-//        val tanggal_table = binding.tanggalTable
-//        val jenismould_table = binding.jenismouldTable
-//        val durasi_table = binding.durasiTable
-//        val pic_table = binding.picTable
-//        val keterangan_table = binding.keteranganTable
-
         val role = resources.getStringArray(com.example.sinarbaruna.R.array.keterangan)
 
         for (jadwal in jadwalList) {

@@ -169,7 +169,7 @@
                     android:id="@+id/btn_tambah"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="start"
                     android:fontFamily="@font/montseratbold"
                     android:text="Tambah"
                     android:textAllCaps="false" />
@@ -179,7 +179,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginStart="50dp"
+                    android:layout_marginStart="40dp"
                     android:fontFamily="@font/montseratbold"
                     android:text="Edit"
                     android:textAllCaps="false" />
@@ -187,8 +187,7 @@
                     android:id="@+id/btn_hapus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_gravity="center"
+                    android:layout_gravity="end"
                     android:layout_marginStart="50dp"
                     android:fontFamily="@font/montseratbold"
                     android:onClick="onDeletedClicked"

@@ -136,7 +136,7 @@ class MasterDataActivity : AppCompatActivity() {
         val token = sharedPreference?.getString("token", "")
         Log.d(ContentValues.TAG, "Token: $token") // Log token
 
-        AndroidNetworking.post("http://sinarbaruna.d2l.my.id/api/jadwal")
+        AndroidNetworking.post("https://sinarbaruna.zegion.cloud/public/api/jadwal")
             .addJSONObjectBody(jsonObject)
             .addHeaders("Content-Type", "application/json")
             .addHeaders("Authorization", "Bearer $token")
@@ -170,7 +170,7 @@ class MasterDataActivity : AppCompatActivity() {
     }
 
     private fun searchById(id: Int) {
-        val url = "http://sinarbaruna.d2l.my.id/api/jadwal/$id"
+        val url = "https://sinarbaruna.zegion.cloud/public/api/jadwal/$id"
 
         val token = getToken()
         Log.d(ContentValues.TAG, "Token: $token")
@@ -193,7 +193,7 @@ class MasterDataActivity : AppCompatActivity() {
                                 binding.edtType.setText(data.getString("type_moulding"))
                                 binding.edtDurasi.setText(data.getString("durasi"))
                                 binding.edtMulaitanggal.setText(data.getString("mulai_tanggal"))
-                                binding.edtPic.setText(data.getString("user_id"))
+                                binding.edtPic.setText(data.getString("username"))
                                 searchedId = id
                             }
 
@@ -244,7 +244,7 @@ class MasterDataActivity : AppCompatActivity() {
         val token = getToken()
         Log.d(ContentValues.TAG, "Token: $token")
 
-        val url = "http://sinarbaruna.d2l.my.id/api/jadwal/$id"
+        val url = "https://sinarbaruna.zegion.cloud/public/api/jadwal/$id"
 
         AndroidNetworking.put(url)
             .addJSONObjectBody(jsonObject)
@@ -280,7 +280,7 @@ class MasterDataActivity : AppCompatActivity() {
     }
 
     private fun deleteJadwal(id: String) {
-        val url = "http://sinarbaruna.d2l.my.id/api/jadwal/$id"
+        val url = "https://sinarbaruna.zegion.cloud/public/api/jadwal/$id"
 
         val token = getToken()
         Log.d(ContentValues.TAG, "Token: $token")

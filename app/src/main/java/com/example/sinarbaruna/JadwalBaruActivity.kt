@@ -60,7 +60,7 @@ class JadwalBaruActivity : AppCompatActivity() {
         }
 
         binding.btnTambah.setOnClickListener {
-            val intent = Intent(this, InputDataJadwalBaruActivity::class.java)
+            val intent = Intent(this@JadwalBaruActivity, InputDataJadwalBaruActivity::class.java)
             startActivity(intent)
         }
 
@@ -139,7 +139,7 @@ class JadwalBaruActivity : AppCompatActivity() {
         val token = sharedPreference?.getString("token", "")
         Log.d(ContentValues.TAG, "Token: $token")
 
-        AndroidNetworking.get("http://sinarbaruna.d2l.my.id/api/jadwal")
+        AndroidNetworking.get("https://sinarbaruna.zegion.cloud/public/api/jadwal")
             .addHeaders("Content-Type", "application/json")
             .addHeaders("Authorization", "Bearer $token")
             .build()

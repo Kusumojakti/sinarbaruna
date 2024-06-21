@@ -95,7 +95,7 @@ class InputStatusJadwalActivity : AppCompatActivity() {
     }
 
     private fun searchById(id: Int) {
-        val url = "http://sinarbaruna.d2l.my.id/api/jadwal/$id"
+        val url = "https://sinarbaruna.zegion.cloud/public/api/jadwal/$id"
 
         val token = getToken()
         Log.d(ContentValues.TAG, "Token: $token")
@@ -133,7 +133,7 @@ class InputStatusJadwalActivity : AppCompatActivity() {
                     Log.d(ContentValues.TAG, "onError errorCode : " + error.errorCode)
                     Log.d(ContentValues.TAG, "onError errorBody : " + error.errorBody)
                     Log.d(ContentValues.TAG, "onError errorDetail : " + error.errorDetail)
-                    Toast.makeText(applicationContext, "Network error: " + error.errorDetail, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Data Tidak Ditemukan", Toast.LENGTH_SHORT).show()
                 }
             })
     }
@@ -170,7 +170,7 @@ class InputStatusJadwalActivity : AppCompatActivity() {
         val token = getToken()
         Log.d(ContentValues.TAG, "Token: $token")
 
-        val url = "http://sinarbaruna.d2l.my.id/api/jadwal/$id"
+        val url = "https://sinarbaruna.zegion.cloud/public/api/jadwal/$id"
 
         AndroidNetworking.put(url)
             .addJSONObjectBody(jsonObject)
@@ -200,13 +200,13 @@ class InputStatusJadwalActivity : AppCompatActivity() {
                     Log.d(ContentValues.TAG, "onError errorCode : " + error.errorCode)
                     Log.d(ContentValues.TAG, "onError errorBody : " + error.errorBody)
                     Log.d(ContentValues.TAG, "onError errorDetail : " + error.errorDetail)
-                    Toast.makeText(applicationContext, "Network error: " + error.errorDetail, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Data Tidak Ditemukan", Toast.LENGTH_SHORT).show()
                 }
             })
     }
 
     private fun deleteJadwal(id: String) {
-        val url = "http://sinarbaruna.d2l.my.id/api/jadwal/$id"
+        val url = "https://sinarbaruna.zegion.cloud/public/api/jadwal/$id"
 
         val token = getToken()
         Log.d(ContentValues.TAG, "Token: $token")
@@ -238,7 +238,7 @@ class InputStatusJadwalActivity : AppCompatActivity() {
                     Log.d(ContentValues.TAG, "onError errorCode : " + error.errorCode)
                     Log.d(ContentValues.TAG, "onError errorBody : " + error.errorBody)
                     Log.d(ContentValues.TAG, "onError errorDetail : " + error.errorDetail)
-                    Toast.makeText(applicationContext, "Network error: " + error.errorDetail, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Data Tidak Ditemukan", Toast.LENGTH_SHORT).show()
                 }
             })
     }

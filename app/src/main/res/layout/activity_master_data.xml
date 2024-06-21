@@ -184,6 +184,7 @@
                     android:background="@drawable/bgform"
                     android:fontFamily="@font/montseratmedium"
                     android:textAlignment="center"
+                    android:textSize="12sp"
                     android:textColorHint="@color/black"
                     android:layout_alignParentEnd="true"/>
             </RelativeLayout>

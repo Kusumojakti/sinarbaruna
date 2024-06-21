@@ -43,12 +43,6 @@ class InputDataJadwalBaruActivity : AppCompatActivity() {
         val pic = binding.edtPic.text.toString().trim()
         val idmoulding = binding.inputIdmoulding.text.toString().trim()
 
-        // Validate input
-        // if (nama.isEmpty() || password.isEmpty() || selectedRole.isNullOrEmpty()) {
-        //     Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
-        //     return
-        // }
-
         // POST API
         val jsonObject = JSONObject()
         try {
@@ -68,7 +62,7 @@ class InputDataJadwalBaruActivity : AppCompatActivity() {
         val token = sharedPreference?.getString("token", "")
         Log.d(ContentValues.TAG, "Token: $token") // Log token
 
-        AndroidNetworking.post("http://sinarbaruna.d2l.my.id/api/jadwal")
+        AndroidNetworking.post("https://sinarbaruna.zegion.cloud/public/api/jadwal")
             .addJSONObjectBody(jsonObject)
             .addHeaders("Content-Type", "application/json")
             .addHeaders("Authorization", "Bearer $token")
@@ -96,7 +90,7 @@ class InputDataJadwalBaruActivity : AppCompatActivity() {
                     Log.d(ContentValues.TAG, "onError errorCode : " + error.errorCode)
                     Log.d(ContentValues.TAG, "onError errorBody : " + error.errorBody)
                     Log.d(ContentValues.TAG, "onError errorDetail : " + error.errorDetail)
-                    Toast.makeText(applicationContext, "Network error: " + error.errorDetail, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Data Tidak Ditemukan", Toast.LENGTH_SHORT).show()
                 }
             })
     }

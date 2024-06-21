@@ -60,6 +60,7 @@
 
 
         <com.chaos.view.PinView
+            android:id="@+id/pinview"
             style="@style/PinWidget.PinView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

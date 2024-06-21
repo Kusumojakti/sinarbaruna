@@ -63,6 +63,7 @@ class RegisterActivity : AppCompatActivity() {
     private fun registerUser() {
         val nama = binding.edtUsername.text.toString().trim()
         val password = binding.edtPassword.text.toString().trim()
+        val email = binding.edtEmail.text.toString().trim()
 
         // Validasi input
         if (nama.isEmpty() || password.isEmpty() || selectedRole.isNullOrEmpty()) {
@@ -74,6 +75,7 @@ class RegisterActivity : AppCompatActivity() {
         val jsonObject = JSONObject()
         try {
             jsonObject.put("username", nama)
+            jsonObject.put("email", email)
             jsonObject.put("bagian", selectedRole)
             jsonObject.put("password", password)
         } catch (e: JSONException) {
@@ -85,7 +87,7 @@ class RegisterActivity : AppCompatActivity() {
 
         val sharedPreference =  this.getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
         val token = sharedPreference?.getString("token","")
-        AndroidNetworking.post("http://sinarbaruna.d2l.my.id/api/user/karyawan")
+        AndroidNetworking.post("https://sinarbaruna.zegion.cloud/public/api/user/karyawan")
             .addJSONObjectBody(jsonObject)
             .addHeaders("Content-Type", "application/json")
             .addHeaders("Authorization", "Bearer $token")
