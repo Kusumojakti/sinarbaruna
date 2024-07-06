@@ -160,7 +160,7 @@
             </HorizontalScrollView>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp">
@@ -169,9 +169,9 @@
                     android:id="@+id/btn_tambah"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:fontFamily="@font/montseratbold"
                     android:text="Tambah"
-                    android:layout_gravity="start"
                     android:textAllCaps="false" />
 
                 <Button
@@ -179,16 +179,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
                     android:fontFamily="@font/montseratbold"
                     android:text="Edit"
-                    android:layout_marginStart="40dp"
                     android:textAllCaps="false" />
+
                 <Button
                     android:id="@+id/btn_hapus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginStart="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
                     android:fontFamily="@font/montseratbold"
                     android:onClick="onDeletedClicked"
                     android:text="Hapus"

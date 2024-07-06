@@ -245,53 +245,55 @@
             </RelativeLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp">
+
                 <Button
                     android:id="@+id/btn_tambah"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:fontFamily="@font/montseratbold"
                     android:text="Tambah"
-                    android:textAllCaps="false"
-                    android:fontFamily="@font/montseratbold"/>
+                    android:textAllCaps="false" />
+
                 <Button
                     android:id="@+id/btn_hapus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/montseratbold"
                     android:text="Hapus"
-                    android:textAllCaps="false"
-                    android:layout_marginStart="50dp"
-                    android:fontFamily="@font/montseratbold"/>
+                    android:textAllCaps="false" />
+
                 <Button
                     android:id="@+id/btn_edit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="Edit"
-                    android:textAllCaps="false"
+                    android:layout_marginStart="10dp"
                     android:fontFamily="@font/montseratbold"
-                    android:layout_marginStart="50dp"
-                    android:layout_alignParentEnd="true"/>
+                    android:text="Edit"
+                    android:textAllCaps="false" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="30dp">
+                android:layout_marginTop="10dp">
 
                 <Button
                     android:id="@+id/btn_kembali"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:fontFamily="@font/montseratbold"
                     android:text="Kembali"
-                    android:textAllCaps="false"
-                    android:fontFamily="@font/montseratbold"/>
+                    android:textAllCaps="false" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
