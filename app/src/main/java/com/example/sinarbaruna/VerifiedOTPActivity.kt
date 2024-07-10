@@ -46,7 +46,7 @@ class VerifiedOTPActivity : AppCompatActivity() {
 
         val sharedPreference =  this.getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
         val token = sharedPreference?.getString("token","")
-        AndroidNetworking.post("https://sinarbaruna.zegion.cloud/public/api/verif-token")
+        AndroidNetworking.post("https://sinarbaruna.zegion.site/api/verif-token")
             .addJSONObjectBody(jsonObject)
             .addHeaders("Content-Type", "application/json")
             .addHeaders("Authorization", "Bearer $token")

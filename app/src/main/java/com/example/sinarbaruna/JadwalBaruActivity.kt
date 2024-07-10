@@ -139,7 +139,7 @@ class JadwalBaruActivity : AppCompatActivity() {
         val token = sharedPreference?.getString("token", "")
         Log.d(ContentValues.TAG, "Token: $token")
 
-        AndroidNetworking.get("https://sinarbaruna.zegion.cloud/public/api/jadwal")
+        AndroidNetworking.get("https://sinarbaruna.zegion.site/api/jadwal")
             .addHeaders("Content-Type", "application/json")
             .addHeaders("Authorization", "Bearer $token")
             .build()

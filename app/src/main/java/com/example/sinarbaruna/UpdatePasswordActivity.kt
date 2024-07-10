@@ -57,7 +57,7 @@ class UpdatePasswordActivity : AppCompatActivity() {
 
         val sharedPreference =  this.getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
         val token = sharedPreference?.getString("token","")
-        AndroidNetworking.post("https://sinarbaruna.zegion.cloud/public/api/update-password")
+        AndroidNetworking.post("https://sinarbaruna.zegion.site/api/update-password")
             .addJSONObjectBody(jsonObject)
             .addHeaders("Content-Type", "application/json")
             .addHeaders("Authorization", "Bearer $token")

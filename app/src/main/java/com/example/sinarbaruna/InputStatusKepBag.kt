@@ -96,7 +96,7 @@ class InputStatusKepBag : AppCompatActivity() {
     }
 
     private fun searchById(id: Int) {
-        val url = "https://sinarbaruna.zegion.cloud/public/api/jadwal/$id"
+        val url = "https://sinarbaruna.zegion.site/api/jadwal/$id"
 
         val token = getToken()
         Log.d(ContentValues.TAG, "Token: $token")
@@ -171,7 +171,7 @@ class InputStatusKepBag : AppCompatActivity() {
         val token = getToken()
         Log.d(ContentValues.TAG, "Token: $token")
 
-        val url = "https://sinarbaruna.zegion.cloud/public/api/jadwal/$id"
+        val url = "https://sinarbaruna.zegion.site/api/jadwal/$id"
 
         AndroidNetworking.put(url)
             .addJSONObjectBody(jsonObject)
@@ -207,7 +207,7 @@ class InputStatusKepBag : AppCompatActivity() {
     }
 
     private fun deleteJadwal(id: String) {
-        val url = "https://sinarbaruna.zegion.cloud/public/api/jadwal/$id"
+        val url = "https://sinarbaruna.zegion.site/api/jadwal/$id"
 
         val token = getToken()
         Log.d(ContentValues.TAG, "Token: $token")

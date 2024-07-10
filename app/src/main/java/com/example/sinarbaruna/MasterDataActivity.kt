@@ -136,7 +136,7 @@ class MasterDataActivity : AppCompatActivity() {
         val token = sharedPreference?.getString("token", "")
         Log.d(ContentValues.TAG, "Token: $token") // Log token
 
-        AndroidNetworking.post("https://sinarbaruna.zegion.cloud/public/api/jadwal")
+        AndroidNetworking.post("https://sinarbaruna.zegion.site/api/jadwal")
             .addJSONObjectBody(jsonObject)
             .addHeaders("Content-Type", "application/json")
             .addHeaders("Authorization", "Bearer $token")
@@ -170,7 +170,7 @@ class MasterDataActivity : AppCompatActivity() {
     }
 
     private fun searchById(id: Int) {
-        val url = "https://sinarbaruna.zegion.cloud/public/api/jadwal/$id"
+        val url = "https://sinarbaruna.zegion.site/api/jadwal/$id"
 
         val token = getToken()
         Log.d(ContentValues.TAG, "Token: $token")
@@ -244,7 +244,7 @@ class MasterDataActivity : AppCompatActivity() {
         val token = getToken()
         Log.d(ContentValues.TAG, "Token: $token")
 
-        val url = "https://sinarbaruna.zegion.cloud/public/api/jadwal/$id"
+        val url = "https://sinarbaruna.zegion.site/api/jadwal/$id"
 
         AndroidNetworking.put(url)
             .addJSONObjectBody(jsonObject)
@@ -280,7 +280,7 @@ class MasterDataActivity : AppCompatActivity() {
     }
 
     private fun deleteJadwal(id: String) {
-        val url = "https://sinarbaruna.zegion.cloud/public/api/jadwal/$id"
+        val url = "https://sinarbaruna.zegion.site/api/jadwal/$id"
 
         val token = getToken()
         Log.d(ContentValues.TAG, "Token: $token")

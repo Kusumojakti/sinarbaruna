@@ -87,7 +87,7 @@ class RegisterActivity : AppCompatActivity() {
 
         val sharedPreference =  this.getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
         val token = sharedPreference?.getString("token","")
-        AndroidNetworking.post("https://sinarbaruna.zegion.cloud/public/api/user/karyawan")
+        AndroidNetworking.post("https://sinarbaruna.zegion.site/api/user/karyawan")
             .addJSONObjectBody(jsonObject)
             .addHeaders("Content-Type", "application/json")
             .addHeaders("Authorization", "Bearer $token")
