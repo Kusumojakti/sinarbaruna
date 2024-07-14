@@ -53,59 +53,103 @@ class DataUsersActivity : AppCompatActivity() {
         fetchDataFromApi()
     }
 
-    private fun fetchDataFromApi() {
-        val sharedPreference = this.getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
-        val token = sharedPreference?.getString("token", "")
-        Log.d(ContentValues.TAG, "Token: $token")
+//    private fun fetchDataFromApi() {
+//        val sharedPreference = this.getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
+//        val token = sharedPreference?.getString("token", "")
+//        Log.d(ContentValues.TAG, "Token: $token")
+//
+//        AndroidNetworking.get("https://sinarbaruna.zegion.site/api/user")
+//            .addHeaders("Content-Type", "application/json")
+//            .addHeaders("Authorization", "Bearer $token")
+//            .build()
+//            .getAsJSONObject(object : JSONObjectRequestListener {
+//                override fun onResponse(response: JSONObject) {
+//                    Log.d(ContentValues.TAG, "Raw Data received: $response")
+//                    try {
+//                        if (response.getString("success").equals("true")) {
+//
+//                            val jadwalArray = response.getJSONArray("data")
+//                            val jadwalList = mutableListOf<dataUsers>()
+//                            jadwalList.addAll(jadwalList)
+//                            for (i in 0 until jadwalArray.length()) {
+//                                val jadwalObject = jadwalArray.getJSONObject(i)
+//                                val jadwal = dataUsers(
+//                                    id = jadwalObject.getInt("id"),
+//                                    name = jadwalObject.getString("name"),
+//                                    username = jadwalObject.getString("username"),
+//                                    email = jadwalObject.getString("email"),
+//                                    bagian = jadwalObject.getString("bagian"),
+//                                    role = jadwalObject.getString("role")
+//                                )
+//                                jadwalList.add(jadwal)
+//                                datausers.add(jadwal)
+//                            }
+//                            Log.d(ContentValues.TAG, "Parsed Data: $jadwalList")
+//                            runOnUiThread {
+//                                populateTable(jadwalList)
+//                            }
+//                        }
+//                    } catch (e: Exception) {
+//                        Log.e(ContentValues.TAG, "Error parsing data: ${e.message}")
+//                    }
+//                }
+//
+//                override fun onError(anError: ANError) {
+//                    Log.e(ContentValues.TAG, "Error: ${anError.errorDetail}")
+//                    Log.e(ContentValues.TAG, "Response: ${anError.response}")
+//                }
+//            })
+//    }
+private fun fetchDataFromApi() {
+    val sharedPreference = this.getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
+    val token = sharedPreference?.getString("token", "")
+    Log.d(ContentValues.TAG, "Token: $token")
 
-        AndroidNetworking.get("https://sinarbaruna.zegion.site/api/user")
-            .addHeaders("Content-Type", "application/json")
-            .addHeaders("Authorization", "Bearer $token")
-            .build()
-            .getAsJSONObject(object : JSONObjectRequestListener {
-                override fun onResponse(response: JSONObject) {
-                    Log.d(ContentValues.TAG, "Raw Data received: $response")
-                    try {
-                        if (response.getString("success").equals("true")) {
-
-                            val jadwalArray = response.getJSONArray("data")
-                            val jadwalList = mutableListOf<dataUsers>()
-                            jadwalList.addAll(jadwalList)
-                            for (i in 0 until jadwalArray.length()) {
-                                val jadwalObject = jadwalArray.getJSONObject(i)
-                                val jadwal = dataUsers(
-                                    id = jadwalObject.getInt("id"),
-                                    name = jadwalObject.getString("name"),
-                                    username = jadwalObject.getString("username"),
-                                    email = jadwalObject.getString("email"),
-                                    bagian = jadwalObject.getString("bagian"),
-                                    role = jadwalObject.getString("role")
-                                )
-                                jadwalList.add(jadwal)
-                                datausers.add(jadwal)
-                            }
-                            Log.d(ContentValues.TAG, "Parsed Data: $jadwalList")
-                            runOnUiThread {
-                                populateTable(jadwalList)
-                            }
+    AndroidNetworking.get("https://sinarbaruna.zegion.site/api/user")
+        .addHeaders("Content-Type", "application/json")
+        .addHeaders("Authorization", "Bearer $token")
+        .build()
+        .getAsJSONObject(object : JSONObjectRequestListener {
+            override fun onResponse(response: JSONObject) {
+                Log.d(ContentValues.TAG, "Raw Data received: $response")
+                try {
+                    if (response.getString("success").equals("true")) {
+                        val jadwalArray = response.getJSONArray("data")
+                        val jadwalList = mutableListOf<dataUsers>()
+                        for (i in 0 until jadwalArray.length()) {
+                            val jadwalObject = jadwalArray.getJSONObject(i)
+                            val jadwal = dataUsers(
+                                id = jadwalObject.getInt("id"),
+                                name = jadwalObject.getString("name"),
+                                username = jadwalObject.getString("username"),
+                                email = jadwalObject.getString("email"),
+                                bagian = jadwalObject.getString("bagian"),
+                                role = jadwalObject.getString("role")
+                            )
+                            jadwalList.add(jadwal)
                         }
-                    } catch (e: Exception) {
-                        Log.e(ContentValues.TAG, "Error parsing data: ${e.message}")
+                        datausers.clear()
+                        datausers.addAll(jadwalList)
+                        populateTable(datausers)
                     }
+                } catch (e: Exception) {
+                    Log.e(ContentValues.TAG, "Error parsing data: ${e.message}")
                 }
+            }
 
-                override fun onError(anError: ANError) {
-                    Log.e(ContentValues.TAG, "Error: ${anError.errorDetail}")
-                    Log.e(ContentValues.TAG, "Response: ${anError.response}")
-                }
-            })
-    }
+            override fun onError(anError: ANError) {
+                Log.e(ContentValues.TAG, "Error: ${anError.errorDetail}")
+                Log.e(ContentValues.TAG, "Response: ${anError.response}")
+            }
+        })
+}
+
 
 
     private fun populateTable(userlist: List<dataUsers>) {
         val role = resources.getStringArray(com.example.sinarbaruna.R.array.actions_array)
 
-
+        var rowNumber = 1
 
         for (users in userlist) {
             val row = TableRow(this).apply {
@@ -118,7 +162,7 @@ class DataUsersActivity : AppCompatActivity() {
             }
 
             val idtableTextView = TextView(this).apply {
-                text = users.id.toString()
+                text = rowNumber.toString()
                 setPadding(5, 5, 5, 5)
                 layoutParams = TableRow.LayoutParams(
                     0,
@@ -223,6 +267,7 @@ class DataUsersActivity : AppCompatActivity() {
             binding.tablelayout.removeView(row)
             binding.tablelayout.addView(row)
             selectedRowIds.add(users.id)
+            rowNumber++
 
         }
     }
@@ -243,7 +288,11 @@ class DataUsersActivity : AppCompatActivity() {
                     try {
                         Log.d(ContentValues.TAG, response.toString())
                         if (response.getString("success") == "true") {
-                            fetchDataFromApi()
+                            // Remove the deleted item from datausers list
+                            datausers.removeAll { it.id == id.toInt() }
+
+                            // Refresh the table layout
+                            populateTable(datausers)
                             Toast.makeText(this@DataUsersActivity, "Delete successful", Toast.LENGTH_SHORT).show()
                         } else {
                             Toast.makeText(applicationContext, response.getString("message"), Toast.LENGTH_SHORT).show()
@@ -262,6 +311,7 @@ class DataUsersActivity : AppCompatActivity() {
                 }
             })
     }
+
     private fun getToken(): String {
         val sharedPreference = this.getSharedPreferences("PREFERENCE_NAME", MODE_PRIVATE)
         return sharedPreference?.getString("token", "") ?: ""
