@@ -72,12 +72,12 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/btn_regist"
+            android:id="@+id/btn_datausers"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/montseratbold"
-            android:text="Register User"
+            android:text="Data User"
             android:textAllCaps="false"
             android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@id/btn_datajadwal"
@@ -93,7 +93,7 @@
             android:text="Master Data"
             android:textAllCaps="false"
             android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@id/btn_regist"
+            app:layout_constraintTop_toBottomOf="@id/btn_datausers"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

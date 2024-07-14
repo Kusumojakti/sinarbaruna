@@ -42,7 +42,9 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
     }
+
 
     private fun verifikasilogin() {
         val username = binding.edtUsername.text.toString().trim()

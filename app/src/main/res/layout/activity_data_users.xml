@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/primary"
+    tools:context=".DataUsersActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        android:padding="25dp"
+        android:background="@color/white"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CV. Sinar Baruna Sejahtera"
+            android:fontFamily="@font/montseratbold"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            android:padding="25dp"
+            android:layout_gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/montseratbold"
+                android:text="Data User"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="18sp"/>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:layout_editor_absoluteX="25dp"
+                tools:layout_editor_absoluteY="75dp">
+
+                <TableLayout
+                    android:id="@+id/tablelayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="30dp"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:stretchColumns="*">
+
+                    <TableRow
+                        android:background="#51B435"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="2dp"
+                            android:text="No"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:textAlignment="center"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="2dp"
+                            android:text="Nama"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:textAlignment="center"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="2dp"
+                            android:text="Username"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:textAlignment="center"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="2dp"
+                            android:text="Email"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:textAlignment="center"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="2dp"
+                            android:text="Jabatan"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:textAlignment="center"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="2dp"
+                            android:text="Bagian"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:textAlignment="center"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="2dp"
+                            android:text="Action"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:textAlignment="center"/>
+                    </TableRow>
+                </TableLayout>
+            </HorizontalScrollView>
+
+            <Button
+                android:id="@+id/btn_tambahusers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/montseratbold"
+                android:text="Tambah"
+                android:layout_marginTop="20dp"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/btn_kembali"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/montseratbold"
+                android:text="Kembali"
+                android:layout_marginTop="20dp"
+                android:textAllCaps="false" />
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

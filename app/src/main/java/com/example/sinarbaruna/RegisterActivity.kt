@@ -22,7 +22,8 @@ import org.json.JSONObject
 class RegisterActivity : AppCompatActivity() {
     private lateinit var dropdown: Spinner
     private lateinit var binding: ActivityRegisterBinding
-    private var selectedRole: String? = null // Variabel untuk menyimpan nilai yang dipilih dari Spinner
+    private var selectedRole: String? = null
+    private var selectedJabatan: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,24 +35,44 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         binding.btnKembali.setOnClickListener {
-            val intent = Intent(this, DashboardsActivity::class.java)
-            startActivity(intent)
+            onBackPressed()
         }
 
-        val role = resources.getStringArray(R.array.bagian)
+        val bagian = resources.getStringArray(R.array.bagian)
         dropdown = findViewById(R.id.dropdown_menu)
         if (dropdown != null) {
             val adapter = ArrayAdapter(
                 this,
-                android.R.layout.simple_spinner_item, role
+                android.R.layout.simple_spinner_item, bagian
             )
             dropdown.adapter = adapter
         }
 
         dropdown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                selectedRole = role[position] // Simpan nilai yang dipilih
+                selectedRole = bagian[position] // Simpan nilai yang dipilih
                 Toast.makeText(this@RegisterActivity, getString(R.string.selected_item) + " " + selectedRole, Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // Tidak ada tindakan
+            }
+        }
+
+        val jabatan = resources.getStringArray(R.array.jabatan)
+        dropdown = findViewById(R.id.dropdown_jabatan)
+        if (dropdown != null) {
+            val adapter = ArrayAdapter(
+                this,
+                android.R.layout.simple_spinner_item, jabatan
+            )
+            dropdown.adapter = adapter
+        }
+
+        dropdown.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                selectedJabatan = jabatan[position] // Simpan nilai yang dipilih
+                Toast.makeText(this@RegisterActivity, getString(R.string.selected_item) + " " + selectedJabatan, Toast.LENGTH_SHORT).show()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -61,7 +82,8 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun registerUser() {
-        val nama = binding.edtUsername.text.toString().trim()
+        val nama = binding.edtName.text.toString().trim()
+        val username = binding.edtUsername.text.toString().trim()
         val password = binding.edtPassword.text.toString().trim()
         val email = binding.edtEmail.text.toString().trim()
 
@@ -74,9 +96,11 @@ class RegisterActivity : AppCompatActivity() {
         // POST API
         val jsonObject = JSONObject()
         try {
-            jsonObject.put("username", nama)
+            jsonObject.put("name", nama)
+            jsonObject.put("username", username)
             jsonObject.put("email", email)
             jsonObject.put("bagian", selectedRole)
+            jsonObject.put("role", selectedJabatan)
             jsonObject.put("password", password)
         } catch (e: JSONException) {
             e.printStackTrace()
@@ -87,7 +111,7 @@ class RegisterActivity : AppCompatActivity() {
 
         val sharedPreference =  this.getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
         val token = sharedPreference?.getString("token","")
-        AndroidNetworking.post("https://sinarbaruna.zegion.site/api/user/karyawan")
+        AndroidNetworking.post("https://sinarbaruna.zegion.site/api/user")
             .addJSONObjectBody(jsonObject)
             .addHeaders("Content-Type", "application/json")
             .addHeaders("Authorization", "Bearer $token")
@@ -99,7 +123,7 @@ class RegisterActivity : AppCompatActivity() {
                         Log.d(ContentValues.TAG, response.toString())
                         if (response.getString("success") == "true") {
                             Toast.makeText(this@RegisterActivity, "Registration successful", Toast.LENGTH_SHORT).show()
-                            val intent = Intent(this@RegisterActivity, DashboardsActivity::class.java)
+                            val intent = Intent(this@RegisterActivity, DataUsersActivity::class.java)
                             startActivity(intent)
                             finish()
                         } else {

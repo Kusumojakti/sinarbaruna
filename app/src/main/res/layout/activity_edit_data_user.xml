@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
+    tools:context=".EditDataUserActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/headerLayout"
@@ -47,7 +47,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Register Users"
+                android:text="Edit Data Users"
                 android:fontFamily="@font/montseratbold"
                 android:textColor="@color/white"
                 android:textSize="18sp"
@@ -194,12 +194,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <Button
-                    android:id="@+id/btn_daftar"
+                    android:id="@+id/btn_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="30dp"
-                    android:text="Daftar"
+                    android:text="Update"
                     android:textAllCaps="false"
                     android:fontFamily="@font/montseratbold"/>
                 <Button

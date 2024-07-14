@@ -19,4 +19,19 @@
         <item>Waiting</item>
         <item>Cancel</item>
     </string-array>
+
+    <string-array name="jabatan">
+        <item>admin</item>
+        <item>manajer</item>
+        <item>kepala bagian</item>
+        <item>karyawan</item>
+    </string-array>
+
+    <string-array name="actions_array">
+        <item>Pilih Action</item>
+        <item>Edit</item>
+        <item>Delete</item>
+    </string-array>
+
+
 </resources>

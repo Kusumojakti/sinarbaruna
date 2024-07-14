@@ -43,8 +43,8 @@ class DashboardsActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.btnRegist.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
+        binding.btnDatausers.setOnClickListener {
+            val intent = Intent(this, DataUsersActivity::class.java)
             startActivity(intent)
         }
 
@@ -56,15 +56,15 @@ class DashboardsActivity : AppCompatActivity() {
     private fun configureButtons(role: String?) {
         when (role) {
             "manajer" -> {
-                binding.btnRegist.visibility = View.GONE
+                binding.btnDatausers.visibility = View.GONE
                 binding.btnMasterdata.visibility = View.GONE
             }
             "admin" -> {
-                binding.btnRegist.visibility = View.VISIBLE
+                binding.btnDatausers.visibility = View.VISIBLE
                 binding.btnMasterdata.visibility = View.VISIBLE
             }
             else -> {
-                binding.btnRegist.visibility = View.GONE
+                binding.btnDatausers.visibility = View.GONE
                 binding.btnMasterdata.visibility = View.GONE
             }
         }
