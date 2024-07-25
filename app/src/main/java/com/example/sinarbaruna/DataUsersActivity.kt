@@ -53,53 +53,6 @@ class DataUsersActivity : AppCompatActivity() {
         fetchDataFromApi()
     }
 
-//    private fun fetchDataFromApi() {
-//        val sharedPreference = this.getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
-//        val token = sharedPreference?.getString("token", "")
-//        Log.d(ContentValues.TAG, "Token: $token")
-//
-//        AndroidNetworking.get("https://sinarbaruna.zegion.site/api/user")
-//            .addHeaders("Content-Type", "application/json")
-//            .addHeaders("Authorization", "Bearer $token")
-//            .build()
-//            .getAsJSONObject(object : JSONObjectRequestListener {
-//                override fun onResponse(response: JSONObject) {
-//                    Log.d(ContentValues.TAG, "Raw Data received: $response")
-//                    try {
-//                        if (response.getString("success").equals("true")) {
-//
-//                            val jadwalArray = response.getJSONArray("data")
-//                            val jadwalList = mutableListOf<dataUsers>()
-//                            jadwalList.addAll(jadwalList)
-//                            for (i in 0 until jadwalArray.length()) {
-//                                val jadwalObject = jadwalArray.getJSONObject(i)
-//                                val jadwal = dataUsers(
-//                                    id = jadwalObject.getInt("id"),
-//                                    name = jadwalObject.getString("name"),
-//                                    username = jadwalObject.getString("username"),
-//                                    email = jadwalObject.getString("email"),
-//                                    bagian = jadwalObject.getString("bagian"),
-//                                    role = jadwalObject.getString("role")
-//                                )
-//                                jadwalList.add(jadwal)
-//                                datausers.add(jadwal)
-//                            }
-//                            Log.d(ContentValues.TAG, "Parsed Data: $jadwalList")
-//                            runOnUiThread {
-//                                populateTable(jadwalList)
-//                            }
-//                        }
-//                    } catch (e: Exception) {
-//                        Log.e(ContentValues.TAG, "Error parsing data: ${e.message}")
-//                    }
-//                }
-//
-//                override fun onError(anError: ANError) {
-//                    Log.e(ContentValues.TAG, "Error: ${anError.errorDetail}")
-//                    Log.e(ContentValues.TAG, "Response: ${anError.response}")
-//                }
-//            })
-//    }
 private fun fetchDataFromApi() {
     val sharedPreference = this.getSharedPreferences("PREFERENCE_NAME", Context.MODE_PRIVATE)
     val token = sharedPreference?.getString("token", "")
@@ -148,6 +101,12 @@ private fun fetchDataFromApi() {
 
     private fun populateTable(userlist: List<dataUsers>) {
         val role = resources.getStringArray(com.example.sinarbaruna.R.array.actions_array)
+
+        // hapus baris selain header
+        val childRow = binding.tablelayout.childCount
+        if (childRow > 1) {
+            binding.tablelayout.removeViews(1, childRow -1)
+        }
 
         var rowNumber = 1
 
@@ -256,7 +215,7 @@ private fun fetchDataFromApi() {
                             startActivity(intent)
                         }
                         else if (selectedAction == "Delete") {
-                            deleteJadwal(users.id.toString())
+                            deleteUser(users.id.toString())
                         }
                     }
                     override fun onNothingSelected(parent: AdapterView<*>) {}
@@ -272,7 +231,7 @@ private fun fetchDataFromApi() {
         }
     }
 
-    private fun deleteJadwal(id: String) {
+    private fun deleteUser(id: String) {
         val url = "https://sinarbaruna.zegion.site/api/user/$id"
 
         val token = getToken()
