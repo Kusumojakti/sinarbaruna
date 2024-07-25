@@ -288,10 +288,9 @@ private fun fetchDataFromApi() {
                     try {
                         Log.d(ContentValues.TAG, response.toString())
                         if (response.getString("success") == "true") {
-                            // Remove the deleted item from datausers list
-                            datausers.removeAll { it.id == id.toInt() }
 
                             // Refresh the table layout
+                            binding.tablelayout.removeAllViews()
                             populateTable(datausers)
                             Toast.makeText(this@DataUsersActivity, "Delete successful", Toast.LENGTH_SHORT).show()
                         } else {
